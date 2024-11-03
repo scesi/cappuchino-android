@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,7 +39,6 @@ import org.scesi.cappuchino.R
 fun HomeScreen() {
     Column(
         modifier = Modifier
-//            .background(Color.Gray)
             .fillMaxSize()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -46,12 +46,11 @@ fun HomeScreen() {
 
     ) {
         Text(
-            text = "Ponte comodo y arma tu horario con un cappuchino",
+            text = stringResource(R.string.titulo_home),
             textAlign = TextAlign.Center,
             fontSize = 15.sp,
             modifier = Modifier
                 .wrapContentHeight()
-//                .background(Color.Cyan)
                 .padding(top = 20.dp)
 
         )
@@ -59,16 +58,16 @@ fun HomeScreen() {
 
         Image(
             painter = painterResource(id = R.drawable.cap),
-            contentDescription = "descrip",
+            contentDescription = stringResource(R.string.taza_logo),
             modifier = Modifier
                 .size(40.dp)
         )
         SearchBar()
         Spacer(modifier = Modifier.height(16.dp))
-        TextBoxCarreras(text= "Licenciatura en ing en sistemas", onClick={})
-        TextBoxCarreras(text= "Licenciatura en ing en Infirmatica", onClick={})
-        TextBoxCarreras(text= "Licenciatura en ing en indistrual", onClick={})
-        TextBoxCarreras(text= "Licenciatura en ing en electronica", onClick={})
+        TextBoxCarreras(text = "Licenciatura en ing en sistemas", onClick = {})
+        TextBoxCarreras(text = "Licenciatura en ing en Infirmatica", onClick = {})
+        TextBoxCarreras(text = "Licenciatura en ing en indistrual", onClick = {})
+        TextBoxCarreras(text = "Licenciatura en ing en electronica", onClick = {})
 
 
     }
@@ -77,8 +76,8 @@ fun HomeScreen() {
 @Composable
 fun TextBoxCarreras(
     text: String,
-    onClick: () -> Unit)
-{
+    onClick: () -> Unit
+) {
 
     Row(
         modifier = Modifier
@@ -93,7 +92,7 @@ fun TextBoxCarreras(
             .padding(horizontal = 6.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
-    ){
+    ) {
         Text(
             text = text,
             fontSize = 15.sp,
@@ -101,7 +100,7 @@ fun TextBoxCarreras(
         )
         Icon(
             painter = painterResource(id = R.drawable.fecha),
-            contentDescription = "Arrow Icon",
+            contentDescription = stringResource(R.string.arrow_icon),
             tint = Color.Black,
             modifier = Modifier.size(24.dp)
         )
@@ -110,17 +109,17 @@ fun TextBoxCarreras(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(){
+fun SearchBar() {
     var searchText by remember { mutableStateOf("") }
 
     OutlinedTextField(
         value = searchText,
         onValueChange = { searchText = it },
-        placeholder = { Text("Busca tu carrera", fontSize = 10.sp) },
+        placeholder = { Text(stringResource(R.string.text_searchbar), fontSize = 10.sp) },
         trailingIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.lupaicon),
-                contentDescription = "Buscar",
+                contentDescription = stringResource(R.string.Search),
                 modifier = Modifier.size(24.dp),
                 tint = Color.Gray
             )
@@ -129,7 +128,6 @@ fun SearchBar(){
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(horizontal = 5.dp)
-//            .background(Color.Yellow)
             .clip(RoundedCornerShape(8.dp)),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Gray,

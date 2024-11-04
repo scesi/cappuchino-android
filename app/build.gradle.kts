@@ -68,7 +68,17 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("androidx.compose.ui:ui:1.5.0") // Cambia la versión a la que prefieras
+    implementation("androidx.compose.material:material:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
+    implementation("androidx.compose.foundation:foundation:1.5.0")
 
+
+    implementation("androidx.compose.ui:ui-resources:1.5.0")
+
+    // Dependencias opcionales para herramientas de previsualización y pruebas
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.0")
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 }

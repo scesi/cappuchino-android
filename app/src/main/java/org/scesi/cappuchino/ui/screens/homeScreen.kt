@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -46,9 +49,9 @@ fun HomeScreen() {
 
     ) {
         Text(
-            text = stringResource(R.string.titulo_home),
+            text = stringResource(R.string.title_home),
             textAlign = TextAlign.Center,
-            fontSize = 15.sp,
+            fontSize = 16.sp,
             modifier = Modifier
                 .wrapContentHeight()
                 .padding(top = 20.dp)
@@ -64,11 +67,29 @@ fun HomeScreen() {
         )
         SearchBar()
         Spacer(modifier = Modifier.height(16.dp))
-        TextBoxCarreras(text = "Licenciatura en ing en sistemas", onClick = {})
-        TextBoxCarreras(text = "Licenciatura en ing en Infirmatica", onClick = {})
-        TextBoxCarreras(text = "Licenciatura en ing en indistrual", onClick = {})
-        TextBoxCarreras(text = "Licenciatura en ing en electronica", onClick = {})
 
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            TextBoxCarreras(text = "Licenciatura en Ing en Sistemas", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Sistemas", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Sistemas", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
+            TextBoxCarreras(text = "LICENCIATURA EN BIOLOGÍA", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
+            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
+        }
 
     }
 }
@@ -115,7 +136,7 @@ fun SearchBar() {
     OutlinedTextField(
         value = searchText,
         onValueChange = { searchText = it },
-        placeholder = { Text(stringResource(R.string.text_searchbar), fontSize = 10.sp) },
+        placeholder = { Text(stringResource(R.string.text_searchbar), fontSize = 16.sp) },
         trailingIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.lupaicon),

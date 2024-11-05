@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Cappuchino</string>
-    <string name="titulo_home">Ponte comodo y arma tu horario con un cappuchino</string>
+    <string name="title_home">¡Ponte cómodo y arma tu horario con un cappuchino!</string>
     <string name="taza_logo">descripcion de taza logo</string>
-    <string name="arrow_icon">Arrow Icon</string>
+    <string name="arrow_icon">descripcion de flecha icono</string>
     <string name="text_searchbar">Busca tu carrera</string>
     <string name="Search">Buscar</string>
 </resources>

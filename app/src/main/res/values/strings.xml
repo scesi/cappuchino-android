@@ -5,4 +5,5 @@
     <string name="arrow_icon">descripcion de flecha icono</string>
     <string name="text_searchbar">Busca tu carrera</string>
     <string name="Search">Buscar</string>
+    <string name="configuraciones">Configuraciones</string>
 </resources>

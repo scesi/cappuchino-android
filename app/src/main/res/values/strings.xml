@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Cappuchino</string>
+    <string name="configuraciones">Configuraciones</string>
     <string name="title_home">¡Ponte cómodo y arma tu horario con un cappuchino!</string>
     <string name="taza_logo">descripcion de taza logo</string>
     <string name="arrow_icon">descripcion de flecha icono</string>

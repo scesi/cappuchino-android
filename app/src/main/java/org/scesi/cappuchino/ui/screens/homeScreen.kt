@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -37,13 +36,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
+import androidx.compose.ui.res.dimensionResource
 
 @Composable
 fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(20.dp),
+            .padding(dimensionResource(id = R.dimen.margin_padding_size_medium)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
 
@@ -51,22 +51,22 @@ fun HomeScreen() {
         Text(
             text = stringResource(R.string.title_home),
             textAlign = TextAlign.Center,
-            fontSize = 16.sp,
+            fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
             modifier = Modifier
                 .wrapContentHeight()
-                .padding(top = 20.dp)
+                .padding(top = dimensionResource(id = R.dimen.margin_padding_size_medium))
 
         )
-        Spacer(modifier = Modifier.height(16.dp))
+//        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
         Image(
             painter = painterResource(id = R.drawable.cap),
             contentDescription = stringResource(R.string.taza_logo),
             modifier = Modifier
-                .size(40.dp)
+                .size(dimensionResource(id = R.dimen.margin_padding_size_xxlarge))
         )
         SearchBar()
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
         Column(
             modifier = Modifier
@@ -104,26 +104,29 @@ fun TextBoxCarreras(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(5.dp)
+            .padding(dimensionResource(id = R.dimen.margin_padding_size_small))
             .background(
                 color = Color(0xFFD1D8FF),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))
             )
             .clickable { onClick() }
-            .padding(horizontal = 6.dp, vertical = 12.dp),
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.margin_padding_size_small),
+                vertical = dimensionResource(id = R.dimen.margin_padding_size_medium)
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
             text = text,
-            fontSize = 15.sp,
+            fontSize = dimensionResource(id = R.dimen.text_size_small).value.sp,
             color = Color.Black
         )
         Icon(
             painter = painterResource(id = R.drawable.fecha),
             contentDescription = stringResource(R.string.arrow_icon),
             tint = Color.Black,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(dimensionResource(id = R.dimen.standard_touch_size))
         )
     }
 }
@@ -136,25 +139,30 @@ fun SearchBar() {
     OutlinedTextField(
         value = searchText,
         onValueChange = { searchText = it },
-        placeholder = { Text(stringResource(R.string.text_searchbar), fontSize = 16.sp) },
+        placeholder = {
+            Text(
+                text = stringResource(R.string.text_searchbar),
+                fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp
+            )
+        },
         trailingIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.lupaicon),
                 contentDescription = stringResource(R.string.Search),
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(dimensionResource(id = R.dimen.standard_touch_size)),
                 tint = Color.Gray
             )
         },
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(horizontal = 5.dp)
-            .clip(RoundedCornerShape(8.dp)),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+            .padding(horizontal = dimensionResource(id = R.dimen.margin_padding_size_small))
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))),
+    colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Gray,
             unfocusedBorderColor = Color.Gray
         ),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))
     )
 
 

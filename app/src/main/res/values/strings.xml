@@ -1,8 +1,21 @@
 <resources>
     <string name="app_name">Cappuchino</string>
+    <string name="configuraciones">Configuraciones</string>
     <string name="title_home">¡Ponte cómodo y arma tu horario con un cappuchino!</string>
     <string name="taza_logo">descripcion de taza logo</string>
     <string name="arrow_icon">descripcion de flecha icono</string>
     <string name="text_searchbar">Busca tu carrera</string>
     <string name="Search">Buscar</string>
+    <string name="configuracion">CONFIGURACION</string>
+    <string name="mantener_horario_al_cerrar_el_navegador">Mantener horario al cerrar el navegador</string>
+    <string name="modo_oscuro">Modo Oscuro</string>
+    <string name="configuracion_visual">CONFIGURACION VISUAL</string>
+    <string name="temas">Temas</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
+    <string name="tama_o_de_la_fuente">Tamaño de la fuente</string>
+    <string name="peque_o">Pequeño</string>
+    <string name="mediano">Mediano</string>
+    <string name="calibri">Calibri</string>
+    <string name="estilo_de_fuente">Estilo de fuente</string>
 </resources>

@@ -6,7 +6,7 @@ import org.scesi.cappuchino.ui.navigation.CappuchinoNavigation
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
-fun Cappuchino(){
+fun Cappuchino() {
     val appState = rememberCappuchinoState()
     CappuchinoScreen {
         CappuchinoNavigation(
@@ -17,7 +17,7 @@ fun Cappuchino(){
 
 
 @Composable
-fun CappuchinoScreen(content: @Composable ()->Unit){
+fun CappuchinoScreen(content: @Composable () -> Unit) {
     CappuchinoTheme {
         Surface {
             content()

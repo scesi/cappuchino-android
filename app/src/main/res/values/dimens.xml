@@ -7,11 +7,16 @@
     -->
 
     <!-- Margin & Padding, 8 dp baseline, https://material.io/design/layout/understanding-layout.html -->
+    <dimen name="margin_padding_size_smallv1">5dp</dimen>
     <dimen name="margin_padding_size_small">8dp</dimen>
+    <dimen name="margin_padding_size_smallv3">12dp</dimen>
     <dimen name="margin_padding_size_medium">16dp</dimen>
+    <dimen name="margin_padding_size_mediumv2">20dp</dimen>
     <dimen name="margin_padding_size_large">24dp</dimen>
     <dimen name="margin_padding_size_xlarge">32dp</dimen>
     <dimen name="margin_padding_size_xxlarge">40dp</dimen>
+    <dimen name="margin_padding_size_xxxlarge">50dp</dimen>
+
 
     <!-- Touch Target Size, https://material.io/design/usability/accessibility.html#layout-and-typography -->
     <dimen name="standard_touch_size">48dp</dimen>

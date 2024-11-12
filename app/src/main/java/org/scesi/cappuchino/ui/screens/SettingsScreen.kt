@@ -7,8 +7,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import org.scesi.cappuchino.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,103 +25,110 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
-@Preview( showBackground = true)
 @Composable
 fun SettingsScreen(){
+    SettingsScreenContent()
+}
+
+@Composable
+private fun SettingsScreenContent(){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column(
-
-        ) {
+        Column() {
             Text(
-                text = "CONFIGURACION",
+                text = stringResource(R.string.configuracion),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
-            Text(text = "Mantener horario al cerrar el navegador", modifier = Modifier.padding(8.dp))
+            Text(text = stringResource(R.string.mantener_horario_al_cerrar_el_navegador), modifier = Modifier.padding(8.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
-            Text(text = "Modo Oscuro", modifier = Modifier.padding(8.dp))
+            Text(text = stringResource(R.string.modo_oscuro), modifier = Modifier.padding(8.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
             Text(
-                text = "CONFIGURACION VISUAL",
+                text = stringResource(R.string.configuracion_visual),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
-            Row {
-                Text(text = "Tamaño de la fuente",
-                    modifier = Modifier.padding(8.dp))
+            ConfigurationRow(
+                title = stringResource(R.string.tama_o_de_la_fuente),
+                listsize = listOf(
+                    stringResource(R.string.peque_o),
+                    stringResource(R.string.mediano),
+                    "Grande")
+            )
 
-                DropDownTamanioFuente()
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
-            }
+            ConfigurationRow(title = stringResource(R.string.estilo_de_fuente),
+                listsize = listOf(stringResource(R.string.calibri),
+                    "Puppets",
+                    "Arial")
+            )
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(text = "Estilo de fuente",
-                    modifier = Modifier.padding(8.dp))
-
-                DropDownStyles()
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Temas")
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            Text(text = stringResource(R.string.temas))
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
         ) {
-            Button(onClick = {  },
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = Color.Black,
-                    containerColor = Color.White
-                ),border = BorderStroke(1.dp, Color.Gray),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Text(text ="Cancelar")
-            }
-            Button(onClick = {  },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Black
-                ), shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.padding(8.dp)
-            ){
-                Text(text ="Guardar")
-            }
+            CappuchinoButton(
+                title = stringResource(R.string.cancelar),
+                contentColor = Color.Black,
+                contarinerColor = Color.White,
+                borderColor = Color.Gray)
+
+            CappuchinoButton(
+                title = stringResource(R.string.guardar),
+                contentColor = Color.White,
+                contarinerColor = Color.Black,
+                borderColor = Color.Black)
+
         }
     }
 }
 
+@Composable
+fun ConfigurationRow(
+    title:String,
+    listsize: List<String>
+){
+    Row {
+        Text(
+            text = title,
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.margin_padding_size_small))
+        )
 
+        DropDown(listsize)
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDownTamanioFuente(){
-    val listsize = listOf("Pequeño", "Mediano", "Grande")
+fun DropDown(listsize: List<String>){
     var expanded by remember { mutableStateOf(false)}
     var selectedText by remember { mutableStateOf(listsize[0])}
-
-
     ExposedDropdownMenuBox(
         expanded = false, onExpandedChange = {expanded = !expanded}
     )
@@ -138,40 +143,35 @@ fun DropDownTamanioFuente(){
             listsize.forEachIndexed { index, text ->
                 DropdownMenuItem(text = { Text(text = text) }, onClick = {
                     selectedText = listsize[index]
-                    expanded = false
-                },
-                contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,)
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DropDownStyles(){
-    val listsize = listOf("Calibri", "Arial", "Otro")
-    var expanded by remember { mutableStateOf(false)}
-    var selectedText by remember { mutableStateOf(listsize[0])}
-
-
-    ExposedDropdownMenuBox(
-        expanded = false, onExpandedChange = {expanded = !expanded}
-    )
-    {
-        TextField(
-            value = selectedText
-            ,onValueChange = {},
-            readOnly = true,
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
-        )
-        ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            listsize.forEachIndexed { index, text ->
-                DropdownMenuItem(text = { Text(text = text) }, onClick = {
-                    selectedText = listsize[index]
-                    expanded = false
-                },
+                    expanded = false },
                     contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,)
             }
         }
+    }
+}
+
+@Composable
+fun CappuchinoButton(
+    title: String,
+    contentColor: Color,
+    contarinerColor: Color,
+    borderColor: Color
+){
+    Button(onClick = {  },
+        colors = ButtonDefaults.outlinedButtonColors(
+            contentColor = contentColor,
+            containerColor = contarinerColor
+        ),border = BorderStroke(1.dp, borderColor),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))
+    ) {
+        Text(title)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SettingsScreenPreview(){
+    CappuchinoTheme {
+        SettingsScreen()
     }
 }

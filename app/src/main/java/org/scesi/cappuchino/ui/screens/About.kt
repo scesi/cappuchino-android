@@ -2,12 +2,14 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.clickable
-import androidx.compose.material.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -24,7 +26,7 @@ fun AboutScreen() {
 
         Text(
             text = "CAPPUCHINO",
-            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.bodyMedium,
             color = Color.DarkGray,
             modifier = Modifier.padding(top = 16.dp)
         )
@@ -39,7 +41,7 @@ fun AboutScreen() {
         ) {
             Text(
                 text = "CONOCE MÁS SOBRE CAPPUCHINO",
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.bodyMedium,
                 color = Color.Red,
                 textAlign = TextAlign.Center
             )
@@ -48,7 +50,7 @@ fun AboutScreen() {
 
             Text(
                 text = "Cappuchino es un sistema que facilita la gestión de horarios a los estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón.",
-                style = MaterialTheme.typography.body2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center
             )
 
@@ -82,7 +84,7 @@ fun AboutScreen() {
 
         Text(
             text = "Similares a Cappuchino",
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.labelMedium,
             textAlign = TextAlign.Center
         )
 

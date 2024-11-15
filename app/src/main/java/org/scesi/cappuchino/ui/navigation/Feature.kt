@@ -8,4 +8,7 @@ object NavFeature{
 
     @Serializable
     object Settings
+
+    @Serializable
+    object About
 }

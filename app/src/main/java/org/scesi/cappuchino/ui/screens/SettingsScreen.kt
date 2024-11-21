@@ -71,13 +71,13 @@ private fun SettingsScreenContent(){
 
             ConfigurationRow(
                 title = stringResource(R.string.tama_o_de_la_fuente),
-                "Mediano"
+                text = "Mediano"
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
             ConfigurationRow(title = stringResource(R.string.estilo_de_fuente),
-                "Calibri"
+                text ="Calibri"
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))

@@ -7,6 +7,8 @@
     -->
 
     <!-- Margin & Padding, 8 dp baseline, https://material.io/design/layout/understanding-layout.html -->
+    <dimen name="border_line">1dp</dimen>
+    <dimen name="corner_radius_small">4dp</dimen>
     <dimen name="margin_padding_size_smallv1">5dp</dimen>
     <dimen name="margin_padding_size_small">8dp</dimen>
     <dimen name="margin_padding_size_smallv3">12dp</dimen>

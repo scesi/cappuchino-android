@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import org.scesi.cappuchino.ui.screens.HomeScreen
+import org.scesi.cappuchino.ui.screens.SettingsScreen
+
 
 @Composable
 fun CappuchinoNavigation(
@@ -26,5 +28,11 @@ fun CappuchinoNavigation(
 private fun NavGraphBuilder.home(navController: NavController){
     composable<NavFeature.Home>{
         HomeScreen("hola")
+    }
+}
+
+private fun NavGraphBuilder.settings(navController: NavController){
+    composable<NavFeature.Settings>{
+        SettingsScreen()
     }
 }

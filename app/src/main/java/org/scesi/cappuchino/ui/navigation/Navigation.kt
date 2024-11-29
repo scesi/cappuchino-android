@@ -1,5 +1,6 @@
 package org.scesi.cappuchino.ui.navigation
 
+import AboutScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -16,9 +17,10 @@ fun CappuchinoNavigation(
 ){
     NavHost(
         navController = navHostController,
-        startDestination = NavFeature.Home
+        startDestination = NavFeature.About
     ){
         home(navController = navHostController)
+        about(navController = navHostController)
 
     }
 
@@ -34,5 +36,10 @@ private fun NavGraphBuilder.home(navController: NavController){
 private fun NavGraphBuilder.settings(navController: NavController){
     composable<NavFeature.Settings>{
         SettingsScreen()
+    }
+}
+private fun NavGraphBuilder.about(navController: NavController) {
+    composable<NavFeature.About> {
+        AboutScreen()
     }
 }

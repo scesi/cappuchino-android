@@ -2,6 +2,7 @@ package org.scesi.cappuchino.ui.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
@@ -18,9 +19,14 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
@@ -71,13 +77,13 @@ private fun SettingsScreenContent(){
 
             ConfigurationRow(
                 title = stringResource(R.string.tama_o_de_la_fuente),
-                text = "Mediano"
+                text = stringResource(id = R.string.Mediano), listOf(stringResource(id = R.string.Pequeño), "Grande", stringResource(id = R.string.Mediano))
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
             ConfigurationRow(title = stringResource(R.string.estilo_de_fuente),
-                text ="Calibri"
+                text = stringResource(id = R.string.Calibri), listOf("Arial", stringResource(id = R.string.Calibri), "Poppins")
             )
 
             Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
@@ -109,7 +115,8 @@ private fun SettingsScreenContent(){
 @Composable
 fun ConfigurationRow(
     title:String,
-    text: String
+    text: String,
+    stringList: List<String>
 ){
     Row{
         Text(
@@ -119,12 +126,15 @@ fun ConfigurationRow(
                 .weight(1f)
         )
 
-        CapuchinDropDown(text = text, modifier = Modifier.weight(1f))
+        CapuchinDropDown(text = text, modifier = Modifier.weight(1f),stringList)
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CapuchinDropDown(text: String, modifier: Modifier){
+fun CapuchinDropDown(text: String, modifier: Modifier, stringList: List<String>){
+    val bottomSheetState = remember { mutableStateOf(false) }
+    val textSelected = remember { mutableStateOf(text)}
     Row(
         modifier = modifier
             .border(
@@ -133,11 +143,16 @@ fun CapuchinDropDown(text: String, modifier: Modifier){
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small))
             )
             .wrapContentHeight()
+
     ){
         Text(
-            text = text, modifier = Modifier
+            text = textSelected.value, modifier = Modifier
                 .weight(3f)
-                .align(Alignment.CenterVertically), textAlign = TextAlign.Center
+                .align(Alignment.CenterVertically)
+                .clickable {
+                    bottomSheetState.value = true
+                },
+            textAlign = TextAlign.Center
         )
         Icon(
             imageVector = Icons.Default.ArrowDropDown,
@@ -149,6 +164,33 @@ fun CapuchinDropDown(text: String, modifier: Modifier){
                     shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small))
                 )
         )
+
+        if(bottomSheetState.value) {
+            ModalBottomSheet(
+                onDismissRequest = { bottomSheetState.value = false }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    stringList.forEach { stringList ->
+                        Text(
+                            text = stringList,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    textSelected.value = stringList
+                                    bottomSheetState.value = false
+                                }
+                                .padding(dimensionResource(id = R.dimen.margin_padding_size_small)),
+                            textAlign = TextAlign.Center
+                        )
+
+                    }
+                }
+            }
+        }
     }
 }
 

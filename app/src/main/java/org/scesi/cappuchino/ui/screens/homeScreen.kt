@@ -43,7 +43,9 @@ import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
 fun HomeScreen(title: String){
-    HomeScreenContent(title)
+    CappuchinoScaffold("Cappuchino"){
+        HomeScreenContent(title)
+    }
 }
 
 @Preview(showBackground = true)

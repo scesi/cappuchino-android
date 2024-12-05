@@ -91,7 +91,7 @@ fun AboutContent(state: AboutState) {
                 .height(dimensionResource(R.dimen.button_height)),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text(text = stringResource(R.string.ir_al_webcito))
+            Text(text = stringResource(R.string.ir_al_wesbcito))
         }
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))

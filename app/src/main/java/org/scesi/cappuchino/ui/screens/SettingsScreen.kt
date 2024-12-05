@@ -46,6 +46,8 @@ fun SettingsScreen(){
 
 @Composable
 private fun SettingsScreenContent(){
+    val sources = listOf("Arial", stringResource(id = R.string.Calibri), "Poppins")
+    val sizes = listOf(stringResource(id = R.string.Pequeño), stringResource(id = R.string.Mediano), "Grande")
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -57,15 +59,27 @@ private fun SettingsScreenContent(){
                 fontSize = 20.sp
             )
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.margin_padding_size_medium))
+            )
 
-            Text(text = stringResource(R.string.mantener_horario_al_cerrar_el_navegador), modifier = Modifier.padding(8.dp))
+            Text(
+                text = stringResource(R.string.mantener_horario_al_cerrar_el_navegador),
+                modifier = Modifier.padding(8.dp)
+            )
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.margin_padding_size_medium))
+            )
 
             Text(text = stringResource(R.string.modo_oscuro), modifier = Modifier.padding(8.dp))
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.margin_padding_size_medium))
+            )
 
             Text(
                 text = stringResource(R.string.configuracion_visual),
@@ -73,20 +87,31 @@ private fun SettingsScreenContent(){
                 fontSize = 20.sp
             )
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.margin_padding_size_medium))
+            )
 
             ConfigurationRow(
                 title = stringResource(R.string.tama_o_de_la_fuente),
-                text = stringResource(id = R.string.Mediano), listOf(stringResource(id = R.string.Pequeño), "Grande", stringResource(id = R.string.Mediano))
+                text = stringResource(id = R.string.Mediano),
+                sizes
             )
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
-
-            ConfigurationRow(title = stringResource(R.string.estilo_de_fuente),
-                text = stringResource(id = R.string.Calibri), listOf("Arial", stringResource(id = R.string.Calibri), "Poppins")
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.margin_padding_size_medium))
             )
 
-            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            ConfigurationRow(
+                title = stringResource(R.string.estilo_de_fuente),
+                text = stringResource(id = R.string.Calibri),
+                sources
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
             Text(text = stringResource(R.string.temas))
         }
         Row(
@@ -100,7 +125,10 @@ private fun SettingsScreenContent(){
                 borderColor = Color.Gray
             )
 
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.margin_padding_size_small)))
+            Spacer(
+                modifier = Modifier
+                    .width(dimensionResource(id = R.dimen.margin_padding_size_small))
+            )
 
             CappuchinoButton(
                 title = stringResource(R.string.guardar),
@@ -145,25 +173,30 @@ fun CapuchinDropDown(text: String, modifier: Modifier, stringList: List<String>)
             .wrapContentHeight()
 
     ){
-        Text(
-            text = textSelected.value, modifier = Modifier
-                .weight(3f)
-                .align(Alignment.CenterVertically)
+        Row (
+            modifier = Modifier
                 .clickable {
                     bottomSheetState.value = true
-                },
-            textAlign = TextAlign.Center
-        )
-        Icon(
-            imageVector = Icons.Default.ArrowDropDown,
-            contentDescription = "Drop Down Icon",
-            modifier = Modifier
-                .border(
-                    width = dimensionResource(id = R.dimen.border_line),
-                    color = Color.Gray,
-                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small))
-                )
-        )
+                }
+        ){
+            Text(
+                text = textSelected.value, modifier = Modifier
+                    .weight(3f)
+                    .align(Alignment.CenterVertically)
+                    , textAlign = TextAlign.Center
+            )
+            Icon(
+                imageVector = Icons.Default.ArrowDropDown,
+                contentDescription = "Drop Down Icon",
+                modifier = Modifier
+                    .border(
+                        width = dimensionResource(id = R.dimen.border_line),
+                        color = Color.Gray,
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small))
+                    )
+            )
+        }
+
 
         if(bottomSheetState.value) {
             ModalBottomSheet(

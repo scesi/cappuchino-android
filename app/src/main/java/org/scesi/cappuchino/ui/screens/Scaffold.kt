@@ -61,7 +61,11 @@ fun CappuchinoScaffold(
                 },
                 actions = {
                     IconButton(onClick = { }) {
-                        Icon(Icons.Default.MoreVert, contentDescription = "More Options")
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = "More Options",
+                            tint = Color.White
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

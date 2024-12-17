@@ -33,9 +33,9 @@ fun CappuchinoScaffold(
     content: @Composable () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
-    val statusBarColor = Color(0xFF4C2A6E)
+
     systemUiController.setStatusBarColor(
-        color = statusBarColor,
+        color = Color.Transparent,
         darkIcons = false
     )
     Scaffold(
@@ -70,6 +70,7 @@ fun CappuchinoScaffold(
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xFF25123F),
+                    scrolledContainerColor = Color.Transparent
                 ),
 
                 )

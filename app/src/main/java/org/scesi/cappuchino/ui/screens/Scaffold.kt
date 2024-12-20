@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.theme.ContainerColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,7 +70,7 @@ fun CappuchinoScaffold(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF25123F),
+                    containerColor = ContainerColor,
                     scrolledContainerColor = Color.Transparent
                 ),
 

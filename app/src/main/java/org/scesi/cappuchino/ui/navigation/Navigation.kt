@@ -29,7 +29,7 @@ fun CappuchinoNavigation(
 
 private fun NavGraphBuilder.home(navController: NavController){
     composable<NavFeature.Home>{
-        HomeScreen("hola")
+        HomeScreen()
     }
 }
 

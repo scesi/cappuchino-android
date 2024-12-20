@@ -16,12 +16,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 
 
 @Composable
 fun AboutScreen() {
-    val state = AboutState()
-    AboutContent(state)
+    CappuchinoScaffold("Cappuchino"){
+        val state = AboutState()
+        AboutContent(state)
+    }
+
 }
 
 

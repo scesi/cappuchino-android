@@ -25,4 +25,6 @@
     <string name="similares_a_cappuchino">Similares a Cappuchino</string>
     <string name="frappuchino">Frappuchino</string>
     <string name="ir_al_webcito">Ir al Webcito</string>
+    <string name="titulo_main">Cappuchino</string>
+
 </resources>

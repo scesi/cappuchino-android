@@ -42,15 +42,18 @@ import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 
 @Composable
-fun HomeScreen(title: String){
-    HomeScreenContent(title)
+fun HomeScreen() {
+    val title = stringResource(id = R.string.titulo_main) // Obtiene la cadena desde strings.xml
+    CappuchinoScaffold(title) {
+        HomeScreenContent(title)
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(){
     CappuchinoTheme {
-        HomeScreen(title = "param")
+        HomeScreen()
     }
 }
 

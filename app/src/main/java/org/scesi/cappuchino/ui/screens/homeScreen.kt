@@ -43,9 +43,9 @@ import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
 fun HomeScreen() {
-    val title = stringResource(id = R.string.titulo_main) // Obtiene la cadena desde strings.xml
+    val title = stringResource(id = R.string.titulo_main)
     CappuchinoScaffold(title) {
-        HomeScreenContent(title)
+        HomeScreenContent()
     }
 }
 
@@ -58,7 +58,7 @@ fun HomeScreenPreview(){
 }
 
 @Composable
-fun HomeScreenContent(title: String) {
+fun HomeScreenContent() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -86,30 +86,7 @@ fun HomeScreenContent(title: String) {
         )
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
         SearchBar()
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-        ) {
-            TextBoxCarreras(text = "Licenciatura en Ing en Sistemas", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Sistemas", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Sistemas", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
-            TextBoxCarreras(text = "LICENCIATURA EN BIOLOGÍA", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Informática", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Industrial", onClick = {})
-            TextBoxCarreras(text = "Licenciatura en Ing en Electrónica", onClick = {})
-        }
 
     }
 }
@@ -117,7 +94,25 @@ fun HomeScreenContent(title: String) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchBar() {
+    val carreras = listOf(
+        "Licenciatura en Ing en Sistemas",
+        "Licenciatura en Ing en Informática",
+        "Licenciatura en Ing en Industrial",
+        "Licenciatura en Ing en Electrónica",
+        "LICENCIATURA EN BIOLOGÍA",
+        "Matematica",
+        "Fisica",
+        "Quimica",
+        "Programacion",
+        "Ingles",
+        "ELementos de la programacion",
+        "Estadistica l",
+
+        )
     var searchText by remember { mutableStateOf("") }
+    val filteredCarreras = carreras.filter { carrera ->
+        carrera.contains(searchText, ignoreCase = true)
+    }
 
     OutlinedTextField(
         value = searchText,
@@ -147,6 +142,26 @@ fun SearchBar() {
         ),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))
     )
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ){
+        if (filteredCarreras.isEmpty()) {
+            Text(
+                text = "No se encontraron resultados",
+                color = Color.Gray,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        } else {
+            filteredCarreras.forEach { carrera ->
+                TextBoxCarreras(text = carrera, onClick = {
+                })
+            }
+        }
+    }
 }
 
 @Composable

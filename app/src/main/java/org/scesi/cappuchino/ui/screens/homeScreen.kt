@@ -39,6 +39,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
+import org.scesi.cappuchino.ui.utils.SearchBar
+import org.scesi.cappuchino.ui.utils.SearchCategory
 
 
 @Composable
@@ -51,7 +53,7 @@ fun HomeScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview(){
+fun HomeScreenPreview() {
     CappuchinoTheme {
         HomeScreen()
     }
@@ -85,118 +87,15 @@ fun HomeScreenContent() {
                 .size(dimensionResource(id = R.dimen.margin_padding_size_xxlarge))
         )
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
-        SearchBar()
-
+        val subjects = listOf(
+            SearchCategory.Subject("Licenciatura en Ing en Sistemas"),
+            SearchCategory.Subject("Licenciatura en Ing en Informática"),
+            SearchCategory.Subject("Matematica"),
+            SearchCategory.Subject("Fisica")
+        )
+        SearchBar(subjects)
 
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SearchBar() {
-    val carreras = listOf(
-        "Licenciatura en Ing en Sistemas",
-        "Licenciatura en Ing en Informática",
-        "Licenciatura en Ing en Industrial",
-        "Licenciatura en Ing en Electrónica",
-        "LICENCIATURA EN BIOLOGÍA",
-        "Matematica",
-        "Fisica",
-        "Quimica",
-        "Programacion",
-        "Ingles",
-        "ELementos de la programacion",
-        "Estadistica l",
 
-        )
-    var searchText by remember { mutableStateOf("") }
-    val filteredCarreras = carreras.filter { carrera ->
-        carrera.contains(searchText, ignoreCase = true)
-    }
-
-    OutlinedTextField(
-        value = searchText,
-        onValueChange = { searchText = it },
-        placeholder = {
-            Text(
-                text = stringResource(R.string.text_searchbar),
-                fontSize = dimensionResource(id = R.dimen.text_size_small).value.sp
-            )
-        },
-        trailingIcon = {
-            Icon(
-                painter = painterResource(id = R.drawable.lupaicon),
-                contentDescription = stringResource(R.string.Search),
-                modifier = Modifier.size(dimensionResource(id = R.dimen.margin_padding_size_mediumv2)),
-                tint = Color.Gray
-            )
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(dimensionResource(id = R.dimen.margin_padding_size_xxxlarge))
-            .padding(horizontal = dimensionResource(id = R.dimen.margin_padding_size_smallv1))
-            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.Gray,
-            unfocusedBorderColor = Color.Gray
-        ),
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))
-    )
-    Spacer(modifier = Modifier.height(16.dp))
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ){
-        if (filteredCarreras.isEmpty()) {
-            Text(
-                text = "No se encontraron resultados",
-                color = Color.Gray,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-        } else {
-            filteredCarreras.forEach { carrera ->
-                TextBoxCarreras(text = carrera, onClick = {
-                })
-            }
-        }
-    }
-}
-
-@Composable
-fun TextBoxCarreras(
-    text: String,
-    onClick: () -> Unit
-) {
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(dimensionResource(id = R.dimen.margin_padding_size_smallv1))
-            .background(
-                color = Color(0xFFD1D8FF),
-                shape = RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))
-            )
-            .clickable { onClick() }
-            .padding(
-                horizontal = dimensionResource(id = R.dimen.margin_padding_size_small),
-                vertical = dimensionResource(id = R.dimen.margin_padding_size_smallv3)
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            text = text,
-            fontSize = dimensionResource(id = R.dimen.text_size_small).value.sp,
-            color = Color.Black
-        )
-        Icon(
-            painter = painterResource(id = R.drawable.fecha),
-            contentDescription = stringResource(R.string.arrow_icon),
-            tint = Color.Black,
-            modifier = Modifier.size(dimensionResource(id = R.dimen.margin_padding_size_medium))
-        )
-    }
-}

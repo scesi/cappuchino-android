@@ -48,7 +48,7 @@ sealed class SearchCategory(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(career:List<SearchCategory>) {
+fun SearchBar(career: List<SearchCategory>, onClick: () -> Unit) {
 
     var searchText by remember { mutableStateOf("") }
     val filteredCarreras = career.filter { carrera ->
@@ -76,7 +76,8 @@ fun SearchBar(career:List<SearchCategory>) {
             .fillMaxWidth()
             .height(dimensionResource(id = R.dimen.margin_padding_size_xxxlarge))
             .padding(horizontal = dimensionResource(id = R.dimen.margin_padding_size_smallv1))
-            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small))),
+            .clip(RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small)))
+            .clickable { onClick() },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Gray,
             unfocusedBorderColor = Color.Gray
@@ -104,17 +105,18 @@ fun SearchBar(career:List<SearchCategory>) {
         }
     }
 }
-@Preview(showBackground = true)
-@Composable
-fun PreviewSearchBar() {
-    val subjects = listOf(
-        SearchCategory.Subject("Licenciatura en Ing en Sistemas"),
-        SearchCategory.Subject("Licenciatura en Ing en Informática"),
-        SearchCategory.Subject("Matematica"),
-        SearchCategory.Subject("Fisica")
-    )
-    SearchBar(career = subjects)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewSearchBar() {
+//    val subjects = listOf(
+//        SearchCategory.Subject("Licenciatura en Ing en Sistemas"),
+//        SearchCategory.Subject("Licenciatura en Ing en Informática"),
+//        SearchCategory.Subject("Matematica"),
+//        SearchCategory.Subject("Fisica")
+//    )
+//
+//    SearchBar(career = subjects, onClick = onSearchBarClicked)
+//}
 
 
 @Composable

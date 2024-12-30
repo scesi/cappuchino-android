@@ -33,9 +33,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.models.SearchCategory
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 import org.scesi.cappuchino.ui.utils.SearchBar
-import org.scesi.cappuchino.ui.utils.SearchCategory
 
 
 @Composable
@@ -45,7 +45,7 @@ fun HomeScreen() {
     CappuchinoScaffold(title) {
         HomeScreenContent(
             searchBarVisible = searchBarVisible,
-            onSearchBarClicked = { searchBarVisible = false }
+            onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible }
         )
     }
 }
@@ -57,11 +57,10 @@ fun HomeScreenPreview() {
         HomeScreen()
     }
 }
-
 @Composable
 fun HomeScreenContent(
     searchBarVisible: Boolean,
-    onSearchBarClicked: () -> Unit
+    onSearchBarFocusChanged: (Boolean) -> Unit
 ) {
     val density = LocalDensity.current
     val slideOffset = with(density) { -40.dp.roundToPx() }
@@ -72,44 +71,39 @@ fun HomeScreenContent(
             .padding(dimensionResource(id = R.dimen.margin_padding_size_mediumv2)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
-
     ) {
-        Text(
-            text = stringResource(R.string.title_home),
-            textAlign = TextAlign.Center,
-            fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
-            modifier = Modifier
-                .wrapContentHeight()
-                .padding(top = dimensionResource(id = R.dimen.margin_padding_size_mediumv2))
-
-        )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_small)))
-
-        Image(
-            painter = painterResource(id = R.drawable.cap),
-            contentDescription = stringResource(R.string.taza_logo),
-            modifier = Modifier
-                .size(dimensionResource(id = R.dimen.margin_padding_size_xxlarge))
-        )
-        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
         AnimatedVisibility(
             visible = searchBarVisible,
             enter = slideInVertically { slideOffset } + expandVertically(expandFrom = Alignment.Top) + fadeIn(),
             exit = slideOutVertically() + shrinkVertically() + fadeOut()
         ) {
-            val subjects = listOf(
-                SearchCategory.Subject("Licenciatura en Ing en Sistemas"),
-                SearchCategory.Subject("Licenciatura en Ing en Informática"),
-                SearchCategory.Subject("Matematica"),
-                SearchCategory.Subject("Fisica")
-            )
-            SearchBar(
-                career = subjects,
-                onClick = onSearchBarClicked
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                Text(
+                    text = stringResource(R.string.title_home),
+                    textAlign = TextAlign.Center,
+                    fontSize = dimensionResource(id = R.dimen.text_size_medium).value.sp,
+                    modifier = Modifier
+                        .wrapContentHeight()
+                        .padding(top = dimensionResource(id = R.dimen.margin_padding_size_mediumv2))
+                )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_small)))
+
+                Image(
+                    painter = painterResource(id = R.drawable.cap),
+                    contentDescription = stringResource(R.string.taza_logo),
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.margin_padding_size_xxlarge))
+                )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.margin_padding_size_medium)))
+            }
         }
 
+        SearchBar(
+            career = SearchCategory.subjectsExample,
+            isSearchBarFocused = { isFocused -> onSearchBarFocusChanged(isFocused) }
+        )
     }
 }
-
-

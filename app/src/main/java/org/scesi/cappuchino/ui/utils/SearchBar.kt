@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -36,24 +37,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.models.SearchCategory
 
-sealed class SearchCategory(
-    var searchCriteria: String
-) {
-    data class Subject(
-        val name: String
-    ) : SearchCategory(name)
-
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(career: List<SearchCategory>, onClick: () -> Unit) {
+fun SearchBar(career: List<SearchCategory>, isSearchBarFocused: (Boolean) -> Unit) {
 
     var searchText by remember { mutableStateOf("") }
     val filteredCarreras = career.filter { carrera ->
         carrera.searchCriteria.contains(searchText, ignoreCase = true)
     }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = dimensionResource(id = R.dimen.margin_padding_size_smallv1))
+    ) {
 
     OutlinedTextField(
         value = searchText,
@@ -77,8 +76,14 @@ fun SearchBar(career: List<SearchCategory>, onClick: () -> Unit) {
             .height(dimensionResource(id = R.dimen.margin_padding_size_xxxlarge))
             .padding(horizontal = dimensionResource(id = R.dimen.margin_padding_size_smallv1))
             .clip(RoundedCornerShape(dimensionResource(id = R.dimen.margin_padding_size_small)))
-            .clickable { onClick() },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+            .onFocusEvent { focusState ->
+                if (focusState.isFocused) {
+                    isSearchBarFocused(false)
+                } else {
+                    isSearchBarFocused(true)
+                }
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Gray,
             unfocusedBorderColor = Color.Gray
         ),
@@ -90,7 +95,7 @@ fun SearchBar(career: List<SearchCategory>, onClick: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-    ){
+    ) {
         if (filteredCarreras.isEmpty()) {
             Text(
                 text = stringResource(id = R.string.not_found),
@@ -104,19 +109,8 @@ fun SearchBar(career: List<SearchCategory>, onClick: () -> Unit) {
             }
         }
     }
+        }
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewSearchBar() {
-//    val subjects = listOf(
-//        SearchCategory.Subject("Licenciatura en Ing en Sistemas"),
-//        SearchCategory.Subject("Licenciatura en Ing en Informática"),
-//        SearchCategory.Subject("Matematica"),
-//        SearchCategory.Subject("Fisica")
-//    )
-//
-//    SearchBar(career = subjects, onClick = onSearchBarClicked)
-//}
 
 
 @Composable
@@ -156,3 +150,8 @@ fun TextBoxSearch(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewSearchBar() {
+    SearchBar(career = SearchCategory.subjectsExample,isSearchBarFocused = { isFocused -> })
+}

@@ -17,7 +17,7 @@
     <dimen name="margin_padding_size_large">24dp</dimen>
     <dimen name="margin_padding_size_xlarge">32dp</dimen>
     <dimen name="margin_padding_size_xxlarge">40dp</dimen>
-    <dimen name="margin_padding_size_xxxlarge">50dp</dimen>
+    <dimen name="margin_padding_size_xxxlarge">60dp</dimen>
 
 
     <!-- Touch Target Size, https://material.io/design/usability/accessibility.html#layout-and-typography -->

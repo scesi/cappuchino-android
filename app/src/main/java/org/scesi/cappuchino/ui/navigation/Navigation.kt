@@ -17,7 +17,7 @@ fun CappuchinoNavigation(
 ){
     NavHost(
         navController = navHostController,
-        startDestination = NavFeature.About
+        startDestination = NavFeature.Home
     ){
         home(navController = navHostController)
         about(navController = navHostController)
@@ -29,7 +29,7 @@ fun CappuchinoNavigation(
 
 private fun NavGraphBuilder.home(navController: NavController){
     composable<NavFeature.Home>{
-        HomeScreen("hola")
+        HomeScreen()
     }
 }
 

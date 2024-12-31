@@ -33,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
-import org.scesi.cappuchino.ui.models.SearchCategory
+import org.scesi.cappuchino.ui.models.mockedSubjects
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 import org.scesi.cappuchino.ui.utils.SearchBar
 
@@ -50,13 +50,6 @@ fun HomeScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    CappuchinoTheme {
-        HomeScreen()
-    }
-}
 @Composable
 fun HomeScreenContent(
     searchBarVisible: Boolean,
@@ -102,8 +95,16 @@ fun HomeScreenContent(
         }
 
         SearchBar(
-            career = SearchCategory.subjectsExample,
+            searchList = mockedSubjects,
             isSearchBarFocused = { isFocused -> onSearchBarFocusChanged(isFocused) }
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    CappuchinoTheme {
+        HomeScreen()
     }
 }

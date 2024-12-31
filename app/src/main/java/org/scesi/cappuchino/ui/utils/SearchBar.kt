@@ -38,14 +38,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
 import org.scesi.cappuchino.ui.models.SearchCategory
+import org.scesi.cappuchino.ui.models.mockedSubjects
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(career: List<SearchCategory>, isSearchBarFocused: (Boolean) -> Unit) {
+fun SearchBar(searchList: List<SearchCategory>, isSearchBarFocused: (Boolean) -> Unit) {
 
     var searchText by remember { mutableStateOf("") }
-    val filteredCarreras = career.filter { carrera ->
+    val filteredCarreras = searchList.filter { carrera ->
         carrera.searchCriteria.contains(searchText, ignoreCase = true)
     }
     Column(
@@ -153,5 +154,5 @@ fun TextBoxSearch(
 @Preview(showBackground = true)
 @Composable
 fun PreviewSearchBar() {
-    SearchBar(career = SearchCategory.subjectsExample,isSearchBarFocused = { isFocused -> })
+    SearchBar(searchList = mockedSubjects, isSearchBarFocused = {})
 }

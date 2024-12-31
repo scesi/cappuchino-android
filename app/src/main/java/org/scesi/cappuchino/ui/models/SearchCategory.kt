@@ -6,13 +6,11 @@ sealed class SearchCategory(
     data class Subject(
         val name: String
     ) : SearchCategory(name)
-
-    companion object {
-        val subjectsExample = listOf(
-            Subject("Licenciatura en Ing en Sistemas"),
-            Subject("Licenciatura en Ing en Informática"),
-            Subject("Matematica"),
-            Subject("Fisica")
-        )
-    }
 }
+
+val mockedSubjects = listOf(
+    SearchCategory.Subject("Licenciatura en Ing en Sistemas"),
+    SearchCategory.Subject("Licenciatura en Ing en Informática"),
+    SearchCategory.Subject("Matematica"),
+    SearchCategory.Subject("Fisica")
+)

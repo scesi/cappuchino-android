@@ -17,6 +17,9 @@
     <string name="peque_o">Pequeño</string>
     <string name="mediano">Mediano</string>
     <string name="calibri">Calibri</string>
+    <string name="arial">Arial</string>
+    <string name="Poppins">Poppins</string>
+    <string name="Grande">Grande</string>
     <string name="estilo_de_fuente">Estilo de fuente</string>
     <string name="conoce_m_s_sobre_cappuchino">CONOCE MÁS SOBRE CAPPUCHINO</string>
     <string name="cappuchino_es_un_sistema_que_facilita_la_gesti_n_de_horarios_a_los_estudiantes_de_la_facultad_de_ciencias_y_tecnolog_a_de_la_universidad_mayor_de_san_sim_n">Cappuchino es un sistema que facilita la gestión de horarios a los estudiantes de la Facultad de Ciencias y Tecnología de la Universidad Mayor de San Simón.</string>
@@ -25,6 +28,8 @@
     <string name="similares_a_cappuchino">Similares a Cappuchino</string>
     <string name="frappuchino">Frappuchino</string>
     <string name="ir_al_webcito">Ir al Webcito</string>
+    <string name="Mediano">Mediano</string>
+    <string name="Pequeño">Pequeño</string>
+    <string name="Calibri">Calibri</string>
     <string name="titulo_main">Cappuchino</string>
-
 </resources>

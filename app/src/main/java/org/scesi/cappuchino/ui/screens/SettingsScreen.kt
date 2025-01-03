@@ -43,7 +43,7 @@ import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 @Composable
 fun SettingsScreen(){
     CappuchinoScaffold("Cappuchino"){
-        SettingsScreenContent()
+        SettingsScreenContent() //Scaffold añadido anteriormente
     }
 }
 

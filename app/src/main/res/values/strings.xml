@@ -32,4 +32,5 @@
     <string name="Pequeño">Pequeño</string>
     <string name="Calibri">Calibri</string>
     <string name="titulo_main">Cappuchino</string>
+    <string name="about_screen_title">Acerca de Cappuchino</string>
 </resources>

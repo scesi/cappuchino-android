@@ -21,11 +21,10 @@ import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 
 @Composable
 fun AboutScreen() {
+    val state = AboutState()
     CappuchinoScaffold("Cappuchino"){
-        val state = AboutState()
         AboutContent(state)
     }
-
 }
 
 
@@ -91,7 +90,7 @@ fun AboutContent(state: AboutState) {
                 .height(dimensionResource(R.dimen.button_height)),
             shape = RoundedCornerShape(8.dp)
         ) {
-            Text(text = stringResource(R.string.ir_al_wesbcito))
+            Text(text = stringResource(R.string.ir_al_webcito))
         }
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))

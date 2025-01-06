@@ -5,6 +5,7 @@
     <string name="taza_logo">descripcion de taza logo</string>
     <string name="arrow_icon">descripcion de flecha icono</string>
     <string name="text_searchbar">Busca tu carrera</string>
+    <string name="not_found">No se encontraron resultados</string>
     <string name="Search">Buscar</string>
     <string name="configuracion">CONFIGURACION</string>
     <string name="mantener_horario_al_cerrar_el_navegador">Mantener horario al cerrar el navegador</string>

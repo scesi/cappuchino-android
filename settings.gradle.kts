@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Cappuchino"
 include(":app")
- 
+include(":data")
+include(":usesCases")
+include(":domain")

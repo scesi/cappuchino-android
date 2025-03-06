@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     id("kotlin-parcelize")
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.compose)
 
 }
 
@@ -59,7 +60,8 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":data"))
+    implementation(project(":usesCases"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

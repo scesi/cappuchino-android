@@ -1,4 +1,4 @@
-package org.scesi.cappuchino.ui.screens
+package org.scesi.cappuchino.ui.screens.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,20 +33,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.koin.androidx.compose.koinViewModel
 import org.scesi.cappuchino.R
-import org.scesi.cappuchino.ui.models.mockedSubjects
+import org.scesi.cappuchino.server.models.SearchCategory
+import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 import org.scesi.cappuchino.ui.utils.SearchBar
+import org.scesi.domain.models.Career
 
 
 @Composable
 fun HomeScreen() {
     val title = stringResource(id = R.string.titulo_main)
     var searchBarVisible by remember { mutableStateOf(true) }
+    val viewModel: HomeViewModel = koinViewModel()
+    val careers by viewModel.careers.collectAsState()
     CappuchinoScaffold(title) {
         HomeScreenContent(
             searchBarVisible = searchBarVisible,
-            onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible }
+            onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
+            searchList = careers
         )
     }
 }
@@ -53,7 +60,8 @@ fun HomeScreen() {
 @Composable
 fun HomeScreenContent(
     searchBarVisible: Boolean,
-    onSearchBarFocusChanged: (Boolean) -> Unit
+    onSearchBarFocusChanged: (Boolean) -> Unit,
+    searchList: List<Career>
 ) {
     val density = LocalDensity.current
     val slideOffset = with(density) { -40.dp.roundToPx() }
@@ -95,7 +103,7 @@ fun HomeScreenContent(
         }
 
         SearchBar(
-            searchList = mockedSubjects,
+            searchList = searchList.map { SearchCategory.RemoteCareer(it.name) },
             isSearchBarFocused = { isFocused -> onSearchBarFocusChanged(isFocused) }
         )
     }

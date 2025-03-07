@@ -37,8 +37,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchino.R
-import org.scesi.cappuchino.server.models.SearchCategory
-import org.scesi.cappuchino.server.models.mockedSubjects
+import org.scesi.domain.models.SearchCategory
+import org.scesi.domain.models.mockedSubjects
 
 
 @OptIn(ExperimentalMaterial3Api::class)

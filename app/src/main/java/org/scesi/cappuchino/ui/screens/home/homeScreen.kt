@@ -35,11 +35,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.koin.androidx.compose.koinViewModel
 import org.scesi.cappuchino.R
-import org.scesi.cappuchino.server.models.SearchCategory
+import org.scesi.domain.models.SearchCategory
 import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 import org.scesi.cappuchino.ui.utils.SearchBar
-import org.scesi.domain.models.Career
 
 
 @Composable
@@ -61,7 +60,7 @@ fun HomeScreen() {
 fun HomeScreenContent(
     searchBarVisible: Boolean,
     onSearchBarFocusChanged: (Boolean) -> Unit,
-    searchList: List<Career>
+    searchList: List<SearchCategory.Career>
 ) {
     val density = LocalDensity.current
     val slideOffset = with(density) { -40.dp.roundToPx() }
@@ -103,7 +102,7 @@ fun HomeScreenContent(
         }
 
         SearchBar(
-            searchList = searchList.map { SearchCategory.RemoteCareer(it.name) },
+            searchList = searchList.map { SearchCategory.Career(it.name) },
             isSearchBarFocused = { isFocused -> onSearchBarFocusChanged(isFocused) }
         )
     }

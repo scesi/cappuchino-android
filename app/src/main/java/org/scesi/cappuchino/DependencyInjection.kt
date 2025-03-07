@@ -15,7 +15,7 @@ fun Application.initDependencyInjection() {
     startKoin {
         androidLogger(Level.ERROR)
         androidContext(this@initDependencyInjection)
-        modules(AppModule().module, DataModule().module, UseCaseModule().module)
+        modules(AppModule().module,DataModule().module, UseCaseModule().module)
     }
 }
 @Module

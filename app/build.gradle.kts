@@ -89,12 +89,11 @@ dependencies {
 
 //retrofit
     implementation(libs.retrofit)
-    implementation(libs.retrofit2.kotlinx.serialization.converter) //no gson
     implementation(libs.okhttp)
     implementation(libs.loggingInterceptor)
     implementation(libs.okhttpUrlConnection)
 
-
+    implementation(libs.converterGson)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 }

@@ -42,10 +42,12 @@ import org.scesi.cappuchino.ui.utils.SearchBar
 
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel = koinViewModel()
+
+) {
     val title = stringResource(id = R.string.titulo_main)
     var searchBarVisible by remember { mutableStateOf(true) }
-    val viewModel: HomeViewModel = koinViewModel()
     val careers by viewModel.careers.collectAsState()
     CappuchinoScaffold(title) {
         HomeScreenContent(

@@ -1,11 +1,10 @@
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,21 +14,52 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalContext
 import org.scesi.cappuchino.R
-import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 
 
-@Composable
-fun AboutScreen() {
-    val state = AboutState()
-    CappuchinoScaffold("Cappuchino"){
-        AboutContent(state)
+fun navigateToWeb(context: android.content.Context, url: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    try {
+        context.startActivity(intent)
+    } catch (e: Exception) {
+
+        val fallbackUrl = "https://www.google.com"
+        val fallbackIntent = Intent(Intent.ACTION_VIEW, Uri.parse(fallbackUrl))
+        context.startActivity(fallbackIntent)
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AboutScreen() {
+    val context = LocalContext.current
+    val state = AboutState()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = stringResource(R.string.about_screen_title)) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            )
+        },
+        content = { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxSize()
+            ) {
+                AboutContent(state, context)
+            }
+        }
+    )
+}
 
 @Composable
-fun AboutContent(state: AboutState) {
+fun AboutContent(state: AboutState, context: android.content.Context) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -83,7 +113,7 @@ fun AboutContent(state: AboutState) {
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
 
         Button(
-            onClick = {  },
+            onClick = { navigateToWeb(context, "https://capuchino.scesi.org/") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF101126)),
             modifier = Modifier
                 .fillMaxWidth(0.7f)
@@ -112,7 +142,7 @@ fun AboutContent(state: AboutState) {
                 modifier = Modifier
                     .size(dimensionResource(R.dimen.box_size))
                     .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
-                    .clickable {  },
+                    .clickable { /* No realiza ninguna acción */ },
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = "Espresso", fontSize = dimensionResource(R.dimen.font_size_body).value.sp)
@@ -121,22 +151,18 @@ fun AboutContent(state: AboutState) {
                 modifier = Modifier
                     .size(dimensionResource(R.dimen.box_size))
                     .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
-                    .clickable {  },
+                    .clickable { /* No realiza ninguna acción */ },
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = stringResource(R.string.frappuchino), fontSize = dimensionResource(R.dimen.font_size_body).value.sp)
+                Text(
+                    text = stringResource(R.string.frappuchino),
+                    fontSize = dimensionResource(R.dimen.font_size_body).value.sp
+                )
             }
         }
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
     }
-}
-
-
-
-@Composable
-fun AboutScreenPreview() {
-    AboutContent(state = AboutState())
 }
 
 data class AboutState(

@@ -21,11 +21,10 @@ import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 
 @Composable
 fun AboutScreen() {
+    val state = AboutState()
     CappuchinoScaffold("Cappuchino"){
-        val state = AboutState()
         AboutContent(state)
     }
-
 }
 
 

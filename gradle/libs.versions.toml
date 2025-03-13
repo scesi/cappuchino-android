@@ -1,6 +1,6 @@
 [versions]
 agp = "8.5.1"
-kotlin = "1.9.0"
+kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -11,6 +11,14 @@ lifecycleRuntimeKtx = "2.8.6"
 activityCompose = "1.9.2"
 composeBom = "2024.04.01"
 navigationRuntimeKtx = "2.8.3"
+jetbrainsKotlinJvm = "2.0.0"
+ksp = "2.0.0-1.0.22"
+koin-annotations_ksp_compiler = "1.3.0"
+koinCore = "3.5.0"
+javaxInject = "1"
+retrofit = "2.11.0"
+okhttp = "4.11.0"
+retrofit2KotlinxSerializationConverter = "0.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +36,19 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
+koin-annotations = { group = "io.insert-koin", name = "koin-annotations", version.ref = "koin-annotations_ksp_compiler" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCore" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+koin-ksp-compiler = { group = "io.insert-koin", name = "koin-ksp-compiler", version.ref = "koin-annotations_ksp_compiler" }
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit"}
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+okhttpUrlConnection = { module = "com.squareup.okhttp3:okhttp-urlconnection", version.ref = "okhttp" }
+converterGson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
@@ -36,5 +57,8 @@ androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navig
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-kotlin-serialization = { id ="org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 

@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     id("kotlin-parcelize")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.compose)
+
 }
 
 android {
@@ -41,6 +44,11 @@ android {
     buildFeatures {
         compose = true
     }
+    applicationVariants.forEach { variant ->
+        variant.sourceSets.forEach {
+            it.javaDirectories += files("build/generated/ksp/${variant.name}/kotlin")
+        }
+    }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
@@ -52,7 +60,9 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":data"))
+    implementation(project(":usesCases"))
+    implementation(project(":domain"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -71,10 +81,19 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.0-alpha")
 
+//koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
 
+//retrofit
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.loggingInterceptor)
+    implementation(libs.okhttpUrlConnection)
 
-
-
+    implementation(libs.converterGson)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 }

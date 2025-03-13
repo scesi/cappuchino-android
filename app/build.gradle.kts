@@ -62,6 +62,7 @@ android {
 dependencies {
     implementation(project(":data"))
     implementation(project(":usesCases"))
+    implementation(project(":domain"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -86,8 +87,13 @@ dependencies {
     implementation(libs.koin.annotations)
     ksp(libs.koin.ksp.compiler)
 
+//retrofit
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.loggingInterceptor)
+    implementation(libs.okhttpUrlConnection)
 
-
+    implementation(libs.converterGson)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 }

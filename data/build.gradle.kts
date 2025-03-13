@@ -18,5 +18,6 @@ dependencies {
 
     implementation(libs.koin.core)
     implementation(libs.koin.annotations)
+    implementation(project(":domain"))
     ksp(libs.koin.ksp.compiler)
 }

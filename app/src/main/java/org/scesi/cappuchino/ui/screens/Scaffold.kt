@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -23,15 +24,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.navigation.BottomNavigationBar
 import org.scesi.cappuchino.ui.theme.ContainerColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CappuchinoScaffold(
     title: String = "",
-    content: @Composable () -> Unit
+    navController: NavController,
+    content: @Composable () -> Unit,
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -75,6 +79,10 @@ fun CappuchinoScaffold(
                 ),
 
                 )
+        },
+        bottomBar = {
+            NavigationBar { BottomNavigationBar(navController)
+            }
         },
         content = { paddingValues ->
             Column(

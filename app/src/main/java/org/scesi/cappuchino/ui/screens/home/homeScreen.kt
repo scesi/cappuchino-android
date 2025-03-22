@@ -33,6 +33,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
 import org.scesi.cappuchino.R
 import org.scesi.domain.models.SearchCategory
@@ -43,13 +46,14 @@ import org.scesi.cappuchino.ui.utils.SearchBar
 
 @Composable
 fun HomeScreen(
+    navController: NavController,
     viewModel: HomeViewModel = koinViewModel()
-
 ) {
     val title = stringResource(id = R.string.titulo_main)
     var searchBarVisible by remember { mutableStateOf(true) }
     val careers by viewModel.careers.collectAsState()
-    CappuchinoScaffold(title) {
+
+    CappuchinoScaffold(title,navController ) {
         HomeScreenContent(
             searchBarVisible = searchBarVisible,
             onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
@@ -114,6 +118,6 @@ fun HomeScreenContent(
 @Composable
 fun HomeScreenPreview() {
     CappuchinoTheme {
-        HomeScreen()
+        HomeScreen(navController = rememberNavController())
     }
 }

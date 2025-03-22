@@ -11,4 +11,10 @@ object NavFeature{
 
     @Serializable
     object About
+
+    @Serializable
+    object More
+
+    @Serializable
+    object Schedule
 }

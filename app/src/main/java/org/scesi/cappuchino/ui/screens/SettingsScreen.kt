@@ -37,12 +37,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.scesi.cappuchino.R
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
-fun SettingsScreen(){
-    CappuchinoScaffold("Cappuchino"){
+fun SettingsScreen(
+    navController: NavController
+){
+    CappuchinoScaffold("Cappuchino", navController){
         SettingsScreenContent() //Scaffold añadido anteriormente
     }
 }
@@ -259,6 +263,6 @@ fun CappuchinoButton(
 @Composable
 private fun SettingsScreenPreview(){
     CappuchinoTheme {
-        SettingsScreen()
+        SettingsScreen(navController = rememberNavController()  )
     }
 }

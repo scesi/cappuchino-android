@@ -1,7 +1,10 @@
 package org.scesi.domain.repositories
 
+import org.scesi.domain.models.CapError
+import org.scesi.domain.models.CapResult
 import org.scesi.domain.models.SearchCategory
 
+
 interface CareerRepository {
-    suspend fun getCareer(): List<SearchCategory.Career>
+    suspend fun getCareer(): CapResult<List<SearchCategory.Career>, CapError>
 }

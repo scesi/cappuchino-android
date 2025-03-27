@@ -40,13 +40,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.CappuchinoState
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
 fun SettingsScreen(
-    navController: NavController
+    navController: NavController,
+    cappuchinoState: CappuchinoState
 ){
-    CappuchinoScaffold("Cappuchino", navController){
+    CappuchinoScaffold("Cappuchino", navController, cappuchinoState){
         SettingsScreenContent() //Scaffold añadido anteriormente
     }
 }

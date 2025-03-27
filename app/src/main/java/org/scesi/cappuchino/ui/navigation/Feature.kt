@@ -2,19 +2,19 @@ package org.scesi.cappuchino.ui.navigation
 
 import kotlinx.serialization.Serializable
 
-object NavFeature{
+sealed class NavFeature {
     @Serializable
-    object Home
+    object Home : NavFeature()
 
     @Serializable
-    object Settings
+    object Settings : NavFeature()
 
     @Serializable
-    object About
+    object About : NavFeature()
 
     @Serializable
-    object More
+    object More : NavFeature()
 
     @Serializable
-    object Schedule
+    object Schedule : NavFeature()
 }

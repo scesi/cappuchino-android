@@ -10,6 +10,7 @@ fun Cappuchino() {
     val appState = rememberCappuchinoState()
     CappuchinoScreen {
         CappuchinoNavigation(
+            cappuchinoState = appState,
             navHostController = appState.navController
         )
     }

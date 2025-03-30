@@ -31,9 +31,11 @@ fun CappuchinoScaffold(
         topBar = { CappuchinoTopBar(title) },
         bottomBar = {
             NavigationBar {
-                BottomNavigationBar(navController = navController, onNavBarItemClicked = { bottomNavBarItem ->
-                    cappuchinoState.onNavBarItemClicked(bottomNavBarItem)
-                })
+                BottomNavigationBar(
+                    selectedItemIndex = cappuchinoState.selectedItemIndex,
+                    onNavBarItemClicked = { bottomNavBarItem ->
+                        cappuchinoState.onNavBarItemClicked(bottomNavBarItem)
+                    })
             }
         },
         content = { paddingValues ->

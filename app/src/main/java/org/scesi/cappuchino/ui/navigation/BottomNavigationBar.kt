@@ -1,31 +1,35 @@
 package org.scesi.cappuchino.ui.navigation
 
+import android.util.Log
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
+import androidx.compose.ui.res.painterResource
 
 @Composable
 fun BottomNavigationBar(
     bottomNavOptions: List<BottomNavBarItem> = bottomNavBarItems,
     onNavBarItemClicked : (BottomNavBarItem) -> Unit,
-    navController: NavController
+    selectedItemIndex: Int
 
 ) {
-
-
-    NavigationBar {
-        val currentRoute = bottomNavOptions.first().navCommand
-        bottomNavOptions.forEach { screen ->
+    NavigationBar{
+        bottomNavOptions.forEachIndexed { index, screen ->
             NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = screen.rute) },
-                label = { Text(screen.rute) },
-                selected = currentRoute == screen.navCommand,
+                selected = selectedItemIndex == index ,
                 onClick = {
                     onNavBarItemClicked(screen)
-                }
+                },
+                icon = {
+                    Log.d("icon", "Index: $index, Selected: $selectedItemIndex, IsSelected: ${selectedItemIndex == index}")
+                    Icon(
+                        painter = painterResource(id = if (index == selectedItemIndex ) screen.iconSelected else screen.iconUnselected),
+                        contentDescription = screen.route
+                    )
+                },
+                label = { Text(screen.route) }
             )
         }
     }

@@ -1,19 +1,31 @@
 package org.scesi.cappuchino.ui.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.graphics.vector.ImageVector
+import org.scesi.cappuchino.R
 
 enum class BottomNavBarItem(
     val navCommand: NavFeature,
-    val icon: ImageVector,
-    val rute: String
+    val iconSelected: Int,
+    val iconUnselected: Int,
+    val route: String
 ) {
-    home(navCommand = NavFeature.Home, icon = Icons.Filled.Home, rute = "Inicio"),
-    schedule(navCommand = NavFeature.Schedule, icon = Icons.Filled.AccountBox, rute = "Horario"),
-    more(navCommand = NavFeature.More, icon = Icons.Filled.Settings, rute = "Configuraciones"),
+    home(
+        navCommand = NavFeature.Home,
+        iconSelected = R.drawable.ic_home_full,
+        iconUnselected = R.drawable.ic_home_empty,
+        route = "Inicio"
+    ),
+    schedule(
+        navCommand = NavFeature.Schedule,
+        iconSelected = R.drawable.ic_horario_full,
+        iconUnselected = R.drawable.ic_horario_empty,
+        route = "Horario"
+    ),
+    more(
+    navCommand = NavFeature.More,
+    iconSelected = R.drawable.tacitafull,
+    iconUnselected = R.drawable.tacitaempty,
+    route = "Más"
+    )
 }
 
  val bottomNavBarItems = listOf(

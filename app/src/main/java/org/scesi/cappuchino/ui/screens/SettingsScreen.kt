@@ -261,10 +261,10 @@ fun CappuchinoButton(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun SettingsScreenPreview(){
-    CappuchinoTheme {
-        SettingsScreen(navController = rememberNavController()  )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//private fun SettingsScreenPreview(){
+//    CappuchinoTheme {
+//        SettingsScreen(navController = rememberNavController()  )
+//    }
+//}

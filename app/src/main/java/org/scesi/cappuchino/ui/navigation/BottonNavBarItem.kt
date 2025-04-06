@@ -1,35 +1,36 @@
 package org.scesi.cappuchino.ui.navigation
 
+import androidx.annotation.StringRes
 import org.scesi.cappuchino.R
 
 enum class BottomNavBarItem(
     val navCommand: NavFeature,
     val iconSelected: Int,
     val iconUnselected: Int,
-    val route: String
+    @StringRes val route: Int
 ) {
-    home(
+    HOME(
         navCommand = NavFeature.Home,
         iconSelected = R.drawable.ic_home_full,
         iconUnselected = R.drawable.ic_home_empty,
-        route = "Inicio"
+        route = R.string.Inicio
     ),
-    schedule(
+    SCHEDULE(
         navCommand = NavFeature.Schedule,
         iconSelected = R.drawable.ic_horario_full,
         iconUnselected = R.drawable.ic_horario_empty,
-        route = "Horario"
+        route = R.string.Horario
     ),
-    more(
+    MORE(
     navCommand = NavFeature.More,
     iconSelected = R.drawable.tacitafull,
     iconUnselected = R.drawable.tacitaempty,
-    route = "Más"
-    )
+    route = R.string.Más
+    );
 }
 
  val bottomNavBarItems = listOf(
-     BottomNavBarItem.home,
-     BottomNavBarItem.schedule,
-     BottomNavBarItem.more
+     BottomNavBarItem.HOME,
+     BottomNavBarItem.SCHEDULE,
+     BottomNavBarItem.MORE
 )

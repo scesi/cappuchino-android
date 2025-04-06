@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.scesi.cappuchino.R
 import org.scesi.cappuchino.ui.theme.ContainerColor
@@ -33,7 +34,7 @@ fun CappuchinoTopBar(title: String) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.sesi),
-                    contentDescription = "Logo",
+                    contentDescription = stringResource(R.string.logo),
                     modifier = Modifier
                         .size(40.dp)
                         .padding(end = 8.dp)
@@ -50,7 +51,7 @@ fun CappuchinoTopBar(title: String) {
             IconButton(onClick = { }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
-                    contentDescription = "More Options",
+                    contentDescription = stringResource(R.string.more_options),
                     tint = Color.White
                 )
             }

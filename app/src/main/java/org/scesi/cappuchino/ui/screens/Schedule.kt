@@ -21,9 +21,7 @@ fun ScheduleScreen(
 ) {
     val title = stringResource(id = R.string.titulo_main)
 
-    CappuchinoScaffold(title, navController, cappuchinoState) {
-        ScheduleScreenContent()
-    }
+    ScheduleScreenContent()
 }
 
 @Composable

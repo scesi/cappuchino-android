@@ -3,16 +3,23 @@ package org.scesi.cappuchino.ui
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import org.scesi.cappuchino.ui.navigation.CappuchinoNavigation
+import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
 fun Cappuchino() {
     val appState = rememberCappuchinoState()
     CappuchinoScreen {
-        CappuchinoNavigation(
-            cappuchinoState = appState,
-            navHostController = appState.navController
-        )
+        CappuchinoScaffold(
+            title = "cappuchino",
+            navController = appState.navController,
+            cappuchinoState = appState
+        ) {
+            CappuchinoNavigation(
+                cappuchinoState = appState,
+                navHostController = appState.navController
+            )
+        }
     }
 }
 

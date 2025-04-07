@@ -22,9 +22,8 @@ fun MoreScreen(
 ) {
     val title = stringResource(id = R.string.titulo_main)
 
-    CappuchinoScaffold(title, navController, cappuchinoState) {
-        MoreScreenContent()
-    }
+    MoreScreenContent()
+
 }
 
 @Composable

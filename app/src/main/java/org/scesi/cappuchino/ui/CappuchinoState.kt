@@ -2,7 +2,7 @@ package org.scesi.cappuchino.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -24,7 +24,7 @@ class CappuchinoState(
     val navController: NavHostController,
     val coroutineScope: CoroutineScope
 ) {
-    var selectedItemIndex by mutableStateOf(0)
+    var selectedItemIndex by mutableIntStateOf(0)
         private set
 
     fun onNavBarItemClicked(navBarItem: BottomNavBarItem) {

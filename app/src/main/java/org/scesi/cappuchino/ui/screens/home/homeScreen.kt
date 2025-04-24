@@ -54,14 +54,11 @@ fun HomeScreen(
     val title = stringResource(id = R.string.titulo_main)
     var searchBarVisible by remember { mutableStateOf(true) }
     val careers by viewModel.careers.collectAsState()
-
-    CappuchinoScaffold(title,navController,cappuchinoState ) {
-        HomeScreenContent(
-            searchBarVisible = searchBarVisible,
-            onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
-            searchList = careers
-        )
-    }
+    HomeScreenContent(
+        searchBarVisible = searchBarVisible,
+        onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
+        searchList = careers
+    )
 }
 
 @Composable

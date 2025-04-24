@@ -22,15 +22,15 @@ enum class BottomNavBarItem(
         route = R.string.Horario
     ),
     MORE(
-    navCommand = NavFeature.More,
-    iconSelected = R.drawable.tacitafull,
-    iconUnselected = R.drawable.tacitaempty,
-    route = R.string.Más
+        navCommand = NavFeature.More,
+        iconSelected = R.drawable.tacitafull,
+        iconUnselected = R.drawable.tacitaempty,
+        route = R.string.Más
     );
 }
 
- val bottomNavBarItems = listOf(
-     BottomNavBarItem.HOME,
-     BottomNavBarItem.SCHEDULE,
-     BottomNavBarItem.MORE
+val bottomNavBarItems = listOf(
+    BottomNavBarItem.HOME,
+    BottomNavBarItem.SCHEDULE,
+    BottomNavBarItem.MORE
 )

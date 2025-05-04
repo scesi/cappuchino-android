@@ -96,4 +96,10 @@ dependencies {
     implementation(libs.converterGson)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+// room
+    implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    ksp(libs.androidx.room.room.compiler)
+//    annotationProcessor (libs.androidx.room.room.compiler)
 }

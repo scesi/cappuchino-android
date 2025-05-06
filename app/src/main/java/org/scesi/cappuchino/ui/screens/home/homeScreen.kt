@@ -41,7 +41,6 @@ import org.koin.androidx.compose.koinViewModel
 import org.scesi.cappuchino.R
 import org.scesi.cappuchino.ui.CappuchinoState
 import org.scesi.cappuchino.ui.rememberCappuchinoState
-import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 import org.scesi.cappuchino.ui.utils.SearchBar
 import org.scesi.domain.models.SearchCategory
@@ -55,11 +54,11 @@ fun HomeScreen(
 ) {
     val title = stringResource(id = R.string.titulo_main)
     var searchBarVisible by remember { mutableStateOf(true) }
-    val careers by viewModel.careers.collectAsState()
+    val careerList = viewModel.dataState.collectAsState().value.careers
     HomeScreenContent(
         searchBarVisible = searchBarVisible,
         onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
-        searchList = careers
+        searchList = careerList
     )
 
 }

@@ -49,7 +49,7 @@ fun SettingsScreen(
     navController: NavController,
     cappuchinoState: CappuchinoState
 ){
-    CappuchinoScaffold("Cappuchino", navController, cappuchinoState){
+    CappuchinoScaffold(stringResource(id = R.string.titulo_main), navController, cappuchinoState) {
         SettingsScreenContent() //Scaffold añadido anteriormente
     }
 }

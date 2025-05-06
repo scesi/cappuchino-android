@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.Flow
 interface CareerDao {
 
     @Query("SELECT * FROM Career")
-    fun getAll(): Flow<List<Career>>
+    suspend fun getAll(): List<Career>
 
     @Query("SELECT * FROM Career WHERE code = :id")
     fun getById(id: Int): Flow<Career>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCareers(careers: List<Career>)
+    suspend fun insertCareers(careers: List<Career>)
 
 }

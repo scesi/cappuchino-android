@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -37,12 +38,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.scesi.cappuchino.R
+import org.scesi.cappuchino.ui.CappuchinoState
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 
 @Composable
-fun SettingsScreen(){
-    CappuchinoScaffold("Cappuchino"){
+fun SettingsScreen(
+    navController: NavController,
+    cappuchinoState: CappuchinoState
+){
+    CappuchinoScaffold(stringResource(id = R.string.titulo_main), navController, cappuchinoState) {
         SettingsScreenContent() //Scaffold añadido anteriormente
     }
 }
@@ -257,8 +264,15 @@ fun CappuchinoButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun SettingsScreenPreview(){
+private fun SettingsScreenPreview() {
     CappuchinoTheme {
-        SettingsScreen()
+        SettingsScreen(
+            navController = rememberNavController(), cappuchinoState = CappuchinoState(
+                navController = rememberNavController(),
+                coroutineScope = rememberCoroutineScope()
+            )
+        )
     }
 }
+
+

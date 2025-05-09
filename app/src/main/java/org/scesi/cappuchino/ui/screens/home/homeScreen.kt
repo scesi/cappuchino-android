@@ -35,34 +35,32 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
 import org.scesi.cappuchino.R
-import org.scesi.domain.models.SearchCategory
-import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
+import org.scesi.cappuchino.ui.CappuchinoState
+import org.scesi.cappuchino.ui.rememberCappuchinoState
 import org.scesi.cappuchino.ui.theme.CappuchinoTheme
 import org.scesi.cappuchino.ui.utils.SearchBar
+import org.scesi.domain.models.SearchCategory
 
 
 @Composable
 fun HomeScreen(
+    navController: NavController,
+    cappuchinoState: CappuchinoState,
     viewModel: HomeViewModel = koinViewModel()
-
 ) {
     val title = stringResource(id = R.string.titulo_main)
     var searchBarVisible by remember { mutableStateOf(true) }
-    val state by viewModel.dataState.collectAsState()
-    if (state.error != null) {
-        ErrorDialog(error = state.error.toString()) {
-            viewModel.clearError()
-        }
-    }
-    CappuchinoScaffold(title) {
-        HomeScreenContent(
-            searchBarVisible = searchBarVisible,
-            onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
-            searchList = state.careers
-        )
-    }
+    val careerList = viewModel.dataState.collectAsState().value.careers
+    HomeScreenContent(
+        searchBarVisible = searchBarVisible,
+        onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
+        searchList = careerList
+    )
+
 }
 
 @Composable
@@ -135,6 +133,8 @@ fun HomeScreenContent(
 @Composable
 fun HomeScreenPreview() {
     CappuchinoTheme {
-        HomeScreen()
+        HomeScreen(
+            navController = rememberNavController(), cappuchinoState = rememberCappuchinoState()
+        )
     }
 }

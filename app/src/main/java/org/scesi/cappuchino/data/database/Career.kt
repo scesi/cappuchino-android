@@ -7,6 +7,5 @@ import androidx.room.PrimaryKey
 data class Career(
     @PrimaryKey(autoGenerate = true) val code: Int,
     val name: String,
-    val semester: String,
     val path: String
 )

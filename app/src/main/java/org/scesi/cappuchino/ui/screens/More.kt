@@ -1,4 +1,4 @@
-package org.scesi.cappuchino.ui.screens.home
+package org.scesi.cappuchino.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,6 @@ import androidx.navigation.compose.rememberNavController
 import org.scesi.cappuchino.R
 import org.scesi.cappuchino.ui.CappuchinoState
 import org.scesi.cappuchino.ui.rememberCappuchinoState
-import org.scesi.cappuchino.ui.screens.CappuchinoScaffold
 
 @Composable
 fun MoreScreen(

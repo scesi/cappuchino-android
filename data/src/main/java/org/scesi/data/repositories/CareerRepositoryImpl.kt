@@ -35,4 +35,12 @@ class CareerRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getListOfSubjects(
+        code: String,
+        path: String
+    ): CapResult<SearchCategory.Subject, CapError> {
+        return remote.getListOfSubjects(code, path)
+    }
+
 }

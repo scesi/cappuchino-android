@@ -8,10 +8,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import org.scesi.cappuchino.ui.CappuchinoState
-import org.scesi.cappuchino.ui.screens.ScheduleScreen
+import org.scesi.cappuchino.ui.screens.schedule.ScheduleScreen
 import org.scesi.cappuchino.ui.screens.home.HomeScreen
 import org.scesi.cappuchino.ui.screens.SettingsScreen
-import org.scesi.cappuchino.ui.screens.home.MoreScreen
+import org.scesi.cappuchino.ui.screens.MoreScreen
+import org.scesi.cappuchino.ui.screens.subject.SubjectScreen
 
 
 @Composable
@@ -28,6 +29,7 @@ fun CappuchinoNavigation(
         more(navController = navHostController, cappuchinoState)
         about(navController = navHostController)
         settings(navController = navHostController,cappuchinoState)
+        subjects(navController = navHostController, cappuchinoState)
     }
 
 
@@ -37,9 +39,27 @@ private fun NavGraphBuilder.home(
     navController: NavController, cappuchinoState: CappuchinoState,
 ) {
     composable<NavFeature.Home> {
-        HomeScreen(navController, cappuchinoState)
+        HomeScreen(
+            goToCareers = { code, path ->
+                val destination = NavFeature.Subjects(code, path)
+                navController.navigate(destination)
+            },
+            navController = navController,
+            cappuchinoState = cappuchinoState
+        )
     }
 }
+private fun NavGraphBuilder.subjects(
+    navController: NavController,
+    cappuchinoState: CappuchinoState,
+) {
+    composable<NavFeature.Subjects> {
+        SubjectScreen(
+            navController, cappuchinoState
+        )
+    }
+}
+
 private fun NavGraphBuilder.schedule(navController: NavController, cappuchinoState: CappuchinoState,){
     composable<NavFeature.Schedule>{
         ScheduleScreen(navController, cappuchinoState)

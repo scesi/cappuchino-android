@@ -17,4 +17,7 @@ sealed class NavFeature {
 
     @Serializable
     object Schedule : NavFeature()
+
+    @Serializable
+    data class Subjects(val code: String, val path: String ) : NavFeature()
 }

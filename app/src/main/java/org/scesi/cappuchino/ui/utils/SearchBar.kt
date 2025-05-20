@@ -43,7 +43,10 @@ import org.scesi.domain.models.mockedSubjects
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBar(searchList: List<SearchCategory>, isSearchBarFocused: (Boolean) -> Unit) {
+fun SearchBar(
+    searchList: List<SearchCategory>,
+    isSearchBarFocused: (Boolean) -> Unit,
+    onCareerClick: (String, String) -> Unit) {
 
     var searchText by remember { mutableStateOf("") }
     val filteredCarreras = searchList.filter { carrera ->
@@ -105,8 +108,11 @@ fun SearchBar(searchList: List<SearchCategory>, isSearchBarFocused: (Boolean) ->
             )
         } else {
             filteredCarreras.forEach { carrera ->
-                TextBoxSearch(text = carrera.searchCriteria, onClick = {
-                })
+                if (carrera is SearchCategory.Career) {
+                    TextBoxSearch(text = carrera.searchCriteria, onClick = {
+                        onCareerClick(carrera.code.toString(), carrera.path)
+                    })
+                }
             }
         }
     }
@@ -154,5 +160,5 @@ fun TextBoxSearch(
 @Preview(showBackground = true)
 @Composable
 fun PreviewSearchBar() {
-    SearchBar(searchList = mockedSubjects, isSearchBarFocused = {})
+    SearchBar(searchList = mockedSubjects, isSearchBarFocused = { }, onCareerClick = { _, _ ->  } )
 }

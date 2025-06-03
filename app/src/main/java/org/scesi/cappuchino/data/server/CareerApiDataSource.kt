@@ -65,6 +65,8 @@ class CareerApiDataSource: CareerRemoteDataSource {
                                         start = schedule.start.orEmpty(),
                                         end = schedule.end.orEmpty(),
                                         room = schedule.room.orEmpty(),
+                                        duration = schedule.room.orEmpty(),
+                                        teacher = schedule.teacher.orEmpty(),
                                         isClass = schedule.isClass ?: false
                                     )
                                 }

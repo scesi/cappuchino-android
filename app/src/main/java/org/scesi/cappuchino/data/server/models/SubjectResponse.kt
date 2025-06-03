@@ -17,11 +17,11 @@ data class SubjectResponse (
 data class LevelsResponse (
 
     @SerializedName("code"     ) var code     : String?             = null,
-    @SerializedName("subjects" ) var subjects : ArrayList<SubjectsResponse> = arrayListOf()
+    @SerializedName("subjects" ) var subjects : ArrayList<SubjectsDetail> = arrayListOf()
 
 )
 
-data class SubjectsResponse (
+data class SubjectsDetail (
 
     @SerializedName("code"   ) var code   : Int?              = null,
     @SerializedName("name"   ) var name   : String?           = null,

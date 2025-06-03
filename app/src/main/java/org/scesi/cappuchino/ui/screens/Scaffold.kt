@@ -1,5 +1,6 @@
 package org.scesi.cappuchino.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,7 +39,7 @@ fun CappuchinoScaffold(
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
 
-    val isSubjectScreen = currentRoute?.contains("subjects") == true
+    val isSubjectScreen = currentRoute?.contains("Subjects") == true
 
     val topBarContent: @Composable () -> Unit = {
         if (isSubjectScreen) {

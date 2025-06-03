@@ -6,10 +6,9 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.Relation
 
-
 @Entity(tableName = "subjects")
 data class SubjectEntity(
-    @PrimaryKey val code: Int,
+    @PrimaryKey val subjectCode: Int,
     val name: String,
     val madeIn: String?,
     val semester: String?,
@@ -19,30 +18,34 @@ data class SubjectEntity(
     val updatedAt: String?
 )
 
-@Entity(tableName = "level")
+@Entity(
+    tableName = "levels",
+    primaryKeys = ["levelCode", "subjectCode"]
+)
 data class LevelEntity(
-    @PrimaryKey val codeLevel: String,
+    val levelCode: String,
     val subjectCode: Int
 )
 
-@Entity(tableName = "subjects_detail")
+@Entity(tableName = "subject_details")
 data class SubjectDetailEntity(
-    @PrimaryKey val codeDetail: Int,
+    @PrimaryKey val subjectDetailCode: Int,
     val name: String,
-    val levelCode: String
-)
-
-@Entity(tableName = "group")
-data class GroupEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val codeGroup: String,
-    val teacher: String?,
+    val levelCode: String,
     val subjectCode: Int
 )
 
-@Entity(tableName = "schedule")
+@Entity(tableName = "groups")
+data class GroupEntity(
+    @PrimaryKey(autoGenerate = true) val groupId: Int = 0,
+    val groupCode: String,
+    val teacher: String?,
+    val subjectDetailCode: Int
+)
+
+@Entity(tableName = "schedules")
 data class ScheduleEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val scheduleId: Int = 0,
     val day: String?,
     val start: String?,
     val end: String?,
@@ -50,44 +53,44 @@ data class ScheduleEntity(
     val room: String?,
     val teacher: String?,
     val isClass: Boolean?,
-    val groupCode: String
+    val groupId: Int
 )
 
 data class SubjectWithLevels(
     @Embedded val subject: SubjectEntity,
     @Relation(
         entity = LevelEntity::class,
-        parentColumn = "code",
+        parentColumn = "subjectCode",
         entityColumn = "subjectCode"
     )
-    val levels: List<LevelWithSubjects>
+    val levels: List<LevelWithSubjectDetails>
 )
 
-data class LevelWithSubjects(
+data class LevelWithSubjectDetails(
     @Embedded val level: LevelEntity,
     @Relation(
         entity = SubjectDetailEntity::class,
-        parentColumn = "codeLevel",
+        parentColumn = "levelCode",
         entityColumn = "levelCode"
     )
-    val subjects: List<SubjectDetailWithGroups>
+    val subjectDetails: List<SubjectDetailWithGroups>
 )
 
 data class SubjectDetailWithGroups(
-    @Embedded val subject: SubjectDetailEntity,
+    @Embedded val subjectDetail: SubjectDetailEntity,
     @Relation(
         entity = GroupEntity::class,
-        parentColumn = "codeDetail",
-        entityColumn = "subjectCode"
+        parentColumn = "subjectDetailCode",
+        entityColumn = "subjectDetailCode"
     )
-    val groups: List<GroupWithSchedule>
+    val groups: List<GroupWithSchedules>
 )
 
-data class GroupWithSchedule(
+data class GroupWithSchedules(
     @Embedded val group: GroupEntity,
     @Relation(
-        parentColumn = "id",
-        entityColumn = "groupCode"
+        parentColumn = "groupId",
+        entityColumn = "groupId"
     )
-    val schedule: List<ScheduleEntity>
+    val schedules: List<ScheduleEntity>
 )

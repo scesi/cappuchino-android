@@ -13,7 +13,7 @@ import org.scesi.cappuchino.data.database.subject.SubjectEntity
 
 @Database(
     entities = [Career::class, SubjectEntity::class, LevelEntity::class, SubjectDetailEntity::class,
-        GroupEntity::class, ScheduleEntity::class], version = 14, exportSchema = false
+        GroupEntity::class, ScheduleEntity::class], version = 15, exportSchema = false
 )
 abstract class AppDataBase: RoomDatabase() {
     abstract fun careerDao(): CareerDao

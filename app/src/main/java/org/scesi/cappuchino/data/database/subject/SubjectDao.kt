@@ -12,7 +12,7 @@ import org.scesi.domain.models.SearchCategory
 @Dao
 interface SubjectDao {
     @Transaction
-    @Query("SELECT * FROM subjects WHERE code = :code AND path = :path")
+    @Query("SELECT * FROM subjects WHERE subjectCode = :code AND path = :path")
     suspend fun getSubjectWithLevels(code: String, path: String): SubjectWithLevels?
 
 
@@ -26,7 +26,7 @@ interface SubjectDao {
     suspend fun insertSubjectDetail(subject: SubjectDetailEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGroup(group: GroupEntity)
+    suspend fun insertGroup(group: GroupEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSchedule(schedule: ScheduleEntity)
@@ -39,18 +39,14 @@ interface SubjectDao {
         subject.levels.forEach { level ->
             val levelEntity = level.toEntity(subject.code)
             insertLevel(levelEntity)
-
             level.subjects.forEach { domainSubject ->
-                val subjectDetailEntity = domainSubject.toEntity(level.code)
+                val subjectDetailEntity = domainSubject.toEntity(level.code, subject.code)
                 insertSubjectDetail(subjectDetailEntity)
-
                 domainSubject.groups.forEach { group ->
                     val groupEntity = group.toEntity(domainSubject.code)
-                    insertGroup(groupEntity)
-
+                    val groupId = insertGroup(groupEntity).toInt()
                     group.schedule.forEach { schedule ->
-                        val scheduleEntity = schedule.toEntity(group.code)
-                        insertSchedule(scheduleEntity)
+                        insertSchedule(schedule.toEntity(groupId))
                     }
                 }
             }

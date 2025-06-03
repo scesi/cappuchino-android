@@ -8,10 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import org.scesi.cappuchino.ui.CappuchinoState
-import org.scesi.cappuchino.ui.screens.schedule.ScheduleScreen
 import org.scesi.cappuchino.ui.screens.home.HomeScreen
 import org.scesi.cappuchino.ui.screens.SettingsScreen
 import org.scesi.cappuchino.ui.screens.MoreScreen
+import org.scesi.cappuchino.ui.screens.ScheduleScreen
 import org.scesi.cappuchino.ui.screens.subject.SubjectScreen
 
 

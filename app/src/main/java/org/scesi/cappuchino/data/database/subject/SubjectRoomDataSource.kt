@@ -15,9 +15,7 @@ class SubjectRoomDataSource(
         path: String
     ): CapResult<SearchCategory.Subject, CapError> {
         return try {
-            println(">>> Buscando en Room: code=$code, path='$path'")
             val subjectWithLevels = subjectDao.getSubjectWithLevels(code, path)
-            println(">>> Resultado Room: $subjectWithLevels")
             if (subjectWithLevels == null) {
                 CapResult.Error(CapError.NotFound)
             } else {
@@ -40,22 +38,22 @@ fun SubjectWithLevels.toDomain(): SearchCategory.Subject {
         semester = subject.semester.orEmpty(),
         support = subject.support.orEmpty(),
         path = subject.path.orEmpty(),
-        code = subject.code,
+        code = subject.subjectCode,
         name = subject.name.orEmpty(),
         url = subject.url.orEmpty(),
         updatedAt = subject.updatedAt.orEmpty(),
         levels = levels.map { levelWithSubjects ->
             SearchCategory.Level(
-                code = levelWithSubjects.level.codeLevel.orEmpty(),
-                subjects = levelWithSubjects.subjects.map { subjectDetailWithGroups ->
+                code = levelWithSubjects.level.levelCode,
+                subjects = levelWithSubjects.subjectDetails.map { subjectDetailWithGroups ->
                     SearchCategory.DomainSubject(
-                        code = subjectDetailWithGroups.subject.codeDetail,
-                        name = subjectDetailWithGroups.subject.name,
+                        code = subjectDetailWithGroups.subjectDetail.subjectDetailCode,
+                        name = subjectDetailWithGroups.subjectDetail.name,
                         groups = subjectDetailWithGroups.groups.map { groupWithSchedule ->
                             SearchCategory.Group(
-                                code = groupWithSchedule.group.codeGroup,
+                                code = groupWithSchedule.group.groupCode,
                                 teacher = groupWithSchedule.group.teacher.orEmpty(),
-                                schedule = groupWithSchedule.schedule.map { sched ->
+                                schedule = groupWithSchedule.schedules.map { sched ->
                                     SearchCategory.Schedule(
                                         day = sched.day.orEmpty(),
                                         start = sched.start.orEmpty(),
@@ -76,7 +74,7 @@ fun SubjectWithLevels.toDomain(): SearchCategory.Subject {
 }
 
 fun SearchCategory.Subject.toEntity(): SubjectEntity = SubjectEntity(
-    code = this.code,
+    subjectCode = this.code,
     name = this.name,
     madeIn = this.madeIn,
     semester = this.semester,
@@ -87,23 +85,24 @@ fun SearchCategory.Subject.toEntity(): SubjectEntity = SubjectEntity(
 )
 
 fun SearchCategory.Level.toEntity(subjectCode: Int): LevelEntity = LevelEntity(
-    codeLevel = this.code,
+    levelCode = this.code,
     subjectCode = subjectCode
 )
 
-fun SearchCategory.DomainSubject.toEntity(codeLevel: String): SubjectDetailEntity = SubjectDetailEntity(
-    codeDetail = this.code,
+fun SearchCategory.DomainSubject.toEntity(levelCode: String, subjectCode: Int): SubjectDetailEntity = SubjectDetailEntity(
+    subjectDetailCode = this.code,
     name = this.name,
-    levelCode = codeLevel
-)
-
-fun SearchCategory.Group.toEntity(subjectCode: Int): GroupEntity = GroupEntity(
-    codeGroup = this.code,
-    teacher = this.teacher,
+    levelCode = levelCode,
     subjectCode = subjectCode
 )
 
-fun SearchCategory.Schedule.toEntity(groupCode: String): ScheduleEntity = ScheduleEntity(
+fun SearchCategory.Group.toEntity(subjectDetailCode: Int): GroupEntity = GroupEntity(
+    groupCode = this.code,
+    teacher = this.teacher,
+    subjectDetailCode = subjectDetailCode
+)
+
+fun SearchCategory.Schedule.toEntity(groupId: Int): ScheduleEntity = ScheduleEntity(
     day = this.day,
     start = this.start,
     end = this.end,
@@ -111,5 +110,5 @@ fun SearchCategory.Schedule.toEntity(groupCode: String): ScheduleEntity = Schedu
     room = this.room,
     teacher = this.teacher,
     isClass = this.isClass,
-    groupCode = groupCode
+    groupId = groupId
 )

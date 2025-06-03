@@ -1,4 +1,4 @@
-package org.scesi.cappuchino.data.database
+package org.scesi.cappuchino.data.database.career
 
 import org.koin.core.annotation.Factory
 import org.scesi.data.dataSources.CareerLocalDataSource
@@ -25,7 +25,6 @@ class CareerRoomDataSource(
     override suspend fun saveCareers(careers: List<SearchCategory.Career>) {
         careerDao.insertCareers(careers.map { it.toEntity() })
     }
-
 }
 
 

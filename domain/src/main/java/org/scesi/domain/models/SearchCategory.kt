@@ -44,7 +44,9 @@ sealed class SearchCategory {
         val day: String,
         val start: String,
         val end: String,
+        val duration: String,
         val room: String,
+        val teacher: String,
         val isClass: Boolean
     )
 }

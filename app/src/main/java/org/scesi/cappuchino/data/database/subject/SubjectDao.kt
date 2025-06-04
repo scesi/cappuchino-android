@@ -43,15 +43,21 @@ interface SubjectDao {
                 val subjectDetailEntity = domainSubject.toEntity(level.code, subject.code)
                 insertSubjectDetail(subjectDetailEntity)
                 domainSubject.groups.forEach { group ->
-                    val groupEntity = group.toEntity(domainSubject.code)
-                    val groupId = insertGroup(groupEntity).toInt()
+                    val groupEntity = group.toEntity(domainSubject.code, subject.code)
+                    insertGroup(groupEntity).toInt()
                     group.schedule.forEach { schedule ->
-                        insertSchedule(schedule.toEntity(groupId))
+                        insertSchedule(
+                            schedule.toEntity(
+                                group = group,
+                                subjectDetailCode = domainSubject.code,
+                                subjectCode = subject.code
+                            )
+                        )
                     }
                 }
             }
         }
-    }
 
+    }
 }
 

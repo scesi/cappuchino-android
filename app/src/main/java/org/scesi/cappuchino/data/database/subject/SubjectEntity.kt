@@ -27,33 +27,49 @@ data class LevelEntity(
     val subjectCode: Int
 )
 
-@Entity(tableName = "subject_details")
+@Entity(
+    tableName = "subject_details",
+    primaryKeys = ["subjectDetailCode", "subjectCode"]
+)
 data class SubjectDetailEntity(
-    @PrimaryKey val subjectDetailCode: Int,
+    val subjectDetailCode: Int,
     val name: String,
     val levelCode: String,
     val subjectCode: Int
 )
 
-@Entity(tableName = "groups")
+@Entity(
+    tableName = "groups",
+    primaryKeys = ["groupCode", "subjectDetailCode", "subjectCode"]
+)
 data class GroupEntity(
-    @PrimaryKey(autoGenerate = true) val groupId: Int = 0,
     val groupCode: String,
     val teacher: String?,
-    val subjectDetailCode: Int
+    val subjectDetailCode: Int,
+    val subjectCode: Int,
 )
 
-@Entity(tableName = "schedules")
+@Entity(
+    tableName = "schedules",
+    primaryKeys = [
+        "groupCode",
+        "subjectDetailCode",
+        "subjectCode",
+        "day",
+        "start"
+    ]
+)
 data class ScheduleEntity(
-    @PrimaryKey(autoGenerate = true) val scheduleId: Int = 0,
-    val day: String?,
-    val start: String?,
+    val day: String,
+    val start: String,
     val end: String?,
     val duration: String?,
     val room: String?,
     val teacher: String?,
     val isClass: Boolean?,
-    val groupId: Int
+    val groupCode: String,
+    val subjectDetailCode: Int,
+    val subjectCode: Int
 )
 
 data class SubjectWithLevels(
@@ -61,7 +77,7 @@ data class SubjectWithLevels(
     @Relation(
         entity = LevelEntity::class,
         parentColumn = "subjectCode",
-        entityColumn = "subjectCode"
+        entityColumn = "subjectCode",
     )
     val levels: List<LevelWithSubjectDetails>
 )
@@ -89,8 +105,8 @@ data class SubjectDetailWithGroups(
 data class GroupWithSchedules(
     @Embedded val group: GroupEntity,
     @Relation(
-        parentColumn = "groupId",
-        entityColumn = "groupId"
+        parentColumn = "groupCode",
+        entityColumn = "groupCode"
     )
     val schedules: List<ScheduleEntity>
 )

@@ -96,13 +96,18 @@ fun SearchCategory.DomainSubject.toEntity(levelCode: String, subjectCode: Int): 
     subjectCode = subjectCode
 )
 
-fun SearchCategory.Group.toEntity(subjectDetailCode: Int): GroupEntity = GroupEntity(
+fun SearchCategory.Group.toEntity(subjectDetailCode: Int,subjectCode: Int ): GroupEntity = GroupEntity(
     groupCode = this.code,
     teacher = this.teacher,
-    subjectDetailCode = subjectDetailCode
+    subjectDetailCode = subjectDetailCode,
+    subjectCode = subjectCode
 )
 
-fun SearchCategory.Schedule.toEntity(groupId: Int): ScheduleEntity = ScheduleEntity(
+fun SearchCategory.Schedule.toEntity(
+    group: SearchCategory.Group,
+    subjectDetailCode: Int,
+    subjectCode: Int
+): ScheduleEntity = ScheduleEntity(
     day = this.day,
     start = this.start,
     end = this.end,
@@ -110,5 +115,7 @@ fun SearchCategory.Schedule.toEntity(groupId: Int): ScheduleEntity = ScheduleEnt
     room = this.room,
     teacher = this.teacher,
     isClass = this.isClass,
-    groupId = groupId
+    groupCode = group.code,
+    subjectDetailCode = subjectDetailCode,
+    subjectCode = subjectCode
 )

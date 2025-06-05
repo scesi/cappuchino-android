@@ -74,39 +74,20 @@ data class ScheduleEntity(
 
 data class SubjectWithLevels(
     @Embedded val subject: SubjectEntity,
-    @Relation(
-        entity = LevelEntity::class,
-        parentColumn = "subjectCode",
-        entityColumn = "subjectCode",
-    )
     val levels: List<LevelWithSubjectDetails>
 )
 
 data class LevelWithSubjectDetails(
     @Embedded val level: LevelEntity,
-    @Relation(
-        entity = SubjectDetailEntity::class,
-        parentColumn = "levelCode",
-        entityColumn = "levelCode"
-    )
     val subjectDetails: List<SubjectDetailWithGroups>
 )
 
 data class SubjectDetailWithGroups(
     @Embedded val subjectDetail: SubjectDetailEntity,
-    @Relation(
-        entity = GroupEntity::class,
-        parentColumn = "subjectDetailCode",
-        entityColumn = "subjectDetailCode"
-    )
     val groups: List<GroupWithSchedules>
 )
 
 data class GroupWithSchedules(
     @Embedded val group: GroupEntity,
-    @Relation(
-        parentColumn = "groupCode",
-        entityColumn = "groupCode"
-    )
     val schedules: List<ScheduleEntity>
 )

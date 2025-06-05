@@ -15,7 +15,8 @@ class SubjectRoomDataSource(
         path: String
     ): CapResult<SearchCategory.Subject, CapError> {
         return try {
-            val subjectWithLevels = subjectDao.getSubjectWithLevels(code, path)
+            val subjectCodeInt = code.toInt()
+            val subjectWithLevels = subjectDao.buildSubjectWithLevels(subjectCodeInt)
             if (subjectWithLevels == null) {
                 CapResult.Error(CapError.NotFound)
             } else {

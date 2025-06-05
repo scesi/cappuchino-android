@@ -11,10 +11,27 @@ import org.scesi.domain.models.SearchCategory
 
 @Dao
 interface SubjectDao {
-    @Transaction
-    @Query("SELECT * FROM subjects WHERE subjectCode = :code AND path = :path")
-    suspend fun getSubjectWithLevels(code: String, path: String): SubjectWithLevels?
+    suspend fun buildSubjectWithLevels(code: Int): SubjectWithLevels? {
+        val subject = getSubject(code) ?: return null
 
+        val levels = getLevels(subject.subjectCode).map { level ->
+            val subjectDetails =
+                getSubjectDetails(level.levelCode, subject.subjectCode).map { detail ->
+                    val groups =
+                        getGroups(detail.subjectDetailCode, subject.subjectCode).map { group ->
+                            val schedules = getSchedules(
+                                group.groupCode,
+                                detail.subjectDetailCode,
+                                subject.subjectCode
+                            )
+                            GroupWithSchedules(group, schedules)
+                        }
+                    SubjectDetailWithGroups(detail, groups)
+                }
+            LevelWithSubjectDetails(level, subjectDetails)
+        }
+        return SubjectWithLevels(subject, levels)
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSubject(subject: SubjectEntity)
@@ -59,5 +76,31 @@ interface SubjectDao {
         }
 
     }
+
+    @Query("SELECT * FROM subjects WHERE subjectCode = :code")
+    suspend fun getSubject(code: Int): SubjectEntity?
+
+    @Query("SELECT * FROM levels WHERE subjectCode = :code")
+    suspend fun getLevels(code: Int): List<LevelEntity>
+
+    @Query("SELECT * FROM subject_details WHERE levelCode = :levelCode AND subjectCode = :subjectCode")
+    suspend fun getSubjectDetails(levelCode: String, subjectCode: Int): List<SubjectDetailEntity>
+
+    @Query("SELECT * FROM groups WHERE subjectDetailCode = :subjectDetailCode AND subjectCode = :subjectCode")
+    suspend fun getGroups(subjectDetailCode: Int, subjectCode: Int): List<GroupEntity>
+
+    @Query(
+        """
+        SELECT * FROM schedules 
+        WHERE groupCode = :groupCode 
+        AND subjectDetailCode = :subjectDetailCode 
+        AND subjectCode = :subjectCode
+    """
+    )
+    suspend fun getSchedules(
+        groupCode: String,
+        subjectDetailCode: Int,
+        subjectCode: Int
+    ): List<ScheduleEntity>
 }
 

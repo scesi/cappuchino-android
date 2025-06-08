@@ -31,8 +31,8 @@ fun ScheduleScreenContent() {
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun MoreScreenPreview() {
-//    ScheduleScreen(navController = rememberNavController(), cappuchinoState = rememberCappuchinoState())
-//}
+@Preview(showBackground = true)
+@Composable
+fun ScheduleScreenPreview() {
+    ScheduleScreen(navController = rememberNavController(), cappuchinoState = rememberCappuchinoState())
+}

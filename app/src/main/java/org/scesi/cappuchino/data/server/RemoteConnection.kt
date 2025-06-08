@@ -6,8 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RemoteConnection {
-    private const val BASE_URL = "https://capuchino-scesi.web.app/data/"
-
+    private const val BASE_URL = "https://capuchino.scesi.org/data/"
     private val loggingInterceptor = HttpLoggingInterceptor().apply{
         level = HttpLoggingInterceptor.Level.BODY
     }

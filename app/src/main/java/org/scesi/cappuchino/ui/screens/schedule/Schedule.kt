@@ -33,6 +33,6 @@ fun ScheduleScreenContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun MoreScreenPreview() {
+fun ScheduleScreenPreview() {
     ScheduleScreen(navController = rememberNavController(), cappuchinoState = rememberCappuchinoState())
 }

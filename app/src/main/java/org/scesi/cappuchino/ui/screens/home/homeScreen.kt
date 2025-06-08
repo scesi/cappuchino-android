@@ -48,6 +48,7 @@ import org.scesi.domain.models.SearchCategory
 
 @Composable
 fun HomeScreen(
+    goToCareers: (code: String, path: String ) -> Unit,
     navController: NavController,
     cappuchinoState: CappuchinoState,
     viewModel: HomeViewModel = koinViewModel()
@@ -56,6 +57,7 @@ fun HomeScreen(
     var searchBarVisible by remember { mutableStateOf(true) }
     val careerList = viewModel.dataState.collectAsState().value.careers
     HomeScreenContent(
+        goToCareers = goToCareers,
         searchBarVisible = searchBarVisible,
         onSearchBarFocusChanged = { isVisible -> searchBarVisible = isVisible },
         searchList = careerList
@@ -64,21 +66,8 @@ fun HomeScreen(
 }
 
 @Composable
-fun ErrorDialog(error: String, onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Error") },
-        text = { Text(error) },
-        confirmButton = {
-            Button(onClick = onDismiss) {
-                Text("Aceptar")
-            }
-        }
-    )
-}
-
-@Composable
 fun HomeScreenContent(
+    goToCareers: (code: String, path: String ) -> Unit,
     searchBarVisible: Boolean,
     onSearchBarFocusChanged: (Boolean) -> Unit,
     searchList: List<SearchCategory.Career>
@@ -123,18 +112,18 @@ fun HomeScreenContent(
         }
 
         SearchBar(
-            searchList = searchList.map { SearchCategory.Career(it.name) },
-            isSearchBarFocused = { isFocused -> onSearchBarFocusChanged(isFocused) }
+            searchList = searchList,
+            isSearchBarFocused = { isFocused -> onSearchBarFocusChanged(isFocused) },
+            onCareerClick = { careerId, path -> goToCareers(careerId, path) }
         )
     }
 }
-
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
     CappuchinoTheme {
         HomeScreen(
-            navController = rememberNavController(), cappuchinoState = rememberCappuchinoState()
+            goToCareers = {code, path ->  } , navController = rememberNavController(), cappuchinoState = rememberCappuchinoState()
         )
     }
 }

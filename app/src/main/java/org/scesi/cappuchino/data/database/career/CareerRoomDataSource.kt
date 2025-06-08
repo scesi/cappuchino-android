@@ -1,7 +1,5 @@
-package org.scesi.cappuchino.data.database
+package org.scesi.cappuchino.data.database.career
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Factory
 import org.scesi.data.dataSources.CareerLocalDataSource
 import org.scesi.domain.models.CapError
@@ -25,16 +23,17 @@ class CareerRoomDataSource(
 
 
     override suspend fun saveCareers(careers: List<SearchCategory.Career>) {
-
         careerDao.insertCareers(careers.map { it.toEntity() })
-
     }
-
 }
 
 
 fun Career.toDomainModel(): SearchCategory.Career =
-    SearchCategory.Career(name = this.name)
+    SearchCategory.Career(
+        name = this.name,
+        code = this.code,
+        path = this.path
+    )
 
 fun SearchCategory.Career.toEntity(): Career =
-    Career(name = this.name, code = 0, semester = "", path = "")
+    Career(name = this.name, code = this.code, path = this.path)

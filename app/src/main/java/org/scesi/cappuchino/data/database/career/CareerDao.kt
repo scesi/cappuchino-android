@@ -1,4 +1,4 @@
-package org.scesi.cappuchino.data.database
+package org.scesi.cappuchino.data.database.career
 
 import androidx.room.Dao
 import androidx.room.Insert
